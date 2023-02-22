@@ -10,4 +10,5 @@ Then after that a single jar file will be created in target folder named backend
 open cmd in this directory and run the command : java -jar backend-0.0.1-SNAPSHOT.jar                                                     
 do not close this cmd                                                     
 open your browser put url http://localhost:8081                                                     
-when exiting close the running jar with ctrl+c                                                     
+when exiting close the running jar with ctrl+c              
+For Reference -> https://github.com/kantega/react-and-spring                            
