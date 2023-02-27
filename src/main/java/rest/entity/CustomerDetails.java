@@ -23,19 +23,20 @@ public class CustomerDetails {
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) // attributes are necessary
     @JoinColumn(name="AddressId")
-    private Addresses address;
+    private Addresses customerAddress;
 
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name="CustomerId")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="adminId")
     private AdminDetails adminDetails;
 
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name="CustomerId")
+    @JoinColumn(name="bhishiId")
     private BhishiDetails bhishiDetails;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name="documentId")
     private SecurityDocuments securityDocuments;
 
     public CustomerDetails(String firstName, String middleName, String lastName, String mobileNumber, String alternateNumber, String aadharNumber, String aadharPic, String guarantor1Aadhar, String guarantor2Aadhar, Addresses address, AdminDetails adminDetails, BhishiDetails bhishiDetails, SecurityDocuments securityDocuments) {
@@ -48,7 +49,7 @@ public class CustomerDetails {
         this.aadharPic = aadharPic;
         this.guarantor1Aadhar = guarantor1Aadhar;
         this.guarantor2Aadhar = guarantor2Aadhar;
-        this.address = address;
+        this.customerAddress = address;
         this.adminDetails = adminDetails;
         this.bhishiDetails = bhishiDetails;
         this.securityDocuments = securityDocuments;
@@ -162,11 +163,11 @@ public class CustomerDetails {
     }
 
     public void setAddress(Addresses address) {
-        this.address = address;
+        this.customerAddress = address;
     }
 
     public Addresses getAddress() {
-        return address;
+        return customerAddress;
     }
 
 

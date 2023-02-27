@@ -1,12 +1,14 @@
 package rest.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import rest.entity.CustomerDetails;
 import rest.repository.CustomerDetailsRepository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class CustomerDetailsService {
     @Autowired
     private CustomerDetailsRepository customerDetailsRepo;

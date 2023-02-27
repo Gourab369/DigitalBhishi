@@ -24,6 +24,9 @@ public class Addresses {
     @OneToOne(mappedBy = "address") // instance variable name not a column name;
     private AdminDetails adminDetails;
 
+    @OneToOne(mappedBy = "customerAddress")
+    private CustomerDetails customerDetails;
+
     public void setAdminDetails(AdminDetails adminDetails) {
         this.adminDetails = adminDetails;
     }

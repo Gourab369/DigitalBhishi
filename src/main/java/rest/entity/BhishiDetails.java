@@ -1,8 +1,6 @@
 package rest.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -13,20 +11,26 @@ public class BhishiDetails {
 
     @Id
     @GeneratedValue
-    private int bhishiID;
+    private int bhishiId;
     private LocalDateTime startDate;
     private LocalDate maturityDate;
-    private int LoanId;
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) // attributes are necessary
+    @JoinColumn(name="LoanId")
+    private LoanDetails loanDetails;
+
+    @OneToOne(mappedBy = "bhishiDetails")
+    private CustomerDetails customerDetails;
     private boolean isActive;
     private boolean loanStatus;
     private int inactiveDays;
     private String terminationStatus;
     private double premiumAmount;
 
-    public BhishiDetails(LocalDateTime startDate, LocalDate maturityDate, int loanId, boolean isActive, boolean loanStatus, int inactiveDays, String terminationStatus, double premiumAmount) {
+    public BhishiDetails(LocalDateTime startDate, LocalDate maturityDate, LoanDetails loanDetails, boolean isActive, boolean loanStatus, int inactiveDays, String terminationStatus, double premiumAmount) {
         this.startDate = startDate;
         this.maturityDate = maturityDate;
-        LoanId = loanId;
+        this.loanDetails = loanDetails;
         this.isActive = isActive;
         this.loanStatus = loanStatus;
         this.inactiveDays = inactiveDays;
@@ -37,8 +41,8 @@ public class BhishiDetails {
     public BhishiDetails() {
     }
 
-    public void setBhishiID(int bhishiID) {
-        this.bhishiID = bhishiID;
+    public void setBhishiID(int bhishiId) {
+        this.bhishiId = bhishiId;
     }
 
     public void setStartDate(LocalDateTime startDate) {
@@ -49,9 +53,6 @@ public class BhishiDetails {
         this.maturityDate = maturityDate;
     }
 
-    public void setLoanId(int loanId) {
-        LoanId = loanId;
-    }
 
     public void setActive(boolean active) {
         isActive = active;
@@ -74,7 +75,7 @@ public class BhishiDetails {
     }
 
     public int getBhishiID() {
-        return bhishiID;
+        return bhishiId;
     }
 
     public LocalDateTime getStartDate() {
@@ -83,10 +84,6 @@ public class BhishiDetails {
 
     public LocalDate getMaturityDate() {
         return maturityDate;
-    }
-
-    public int getLoanId() {
-        return LoanId;
     }
 
     public boolean isActive() {
@@ -109,16 +106,13 @@ public class BhishiDetails {
         return premiumAmount;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BhishiDetails that = (BhishiDetails) o;
-        return bhishiID == that.bhishiID && LoanId == that.LoanId && isActive == that.isActive && loanStatus == that.loanStatus && inactiveDays == that.inactiveDays && Double.compare(that.premiumAmount, premiumAmount) == 0 && Objects.equals(startDate, that.startDate) && Objects.equals(maturityDate, that.maturityDate) && Objects.equals(terminationStatus, that.terminationStatus);
+    public LoanDetails getLoanDetails() {
+        return loanDetails;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(bhishiID, startDate, maturityDate, LoanId, isActive, loanStatus, inactiveDays, terminationStatus, premiumAmount);
+    
+    public void setLoanDetails(LoanDetails loanDetails) {
+        this.loanDetails = loanDetails;
     }
+
 }

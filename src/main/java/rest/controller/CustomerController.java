@@ -2,13 +2,14 @@ package rest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import rest.entity.CustomerDetails;
+import rest.entity.*;
 import rest.entity.CustomerDetails;
 import rest.service.CustomerDetailsService;
 import rest.service.CustomerDetailsService;
 
 import java.util.List;
 
+@RestController
 public class CustomerController {
     @Autowired
     private CustomerDetailsService customerDetailsService;
@@ -29,7 +30,13 @@ public class CustomerController {
     @PostMapping("/customerDetails-api")
     public CustomerDetails createNewCustomerDetails(@RequestBody CustomerDetails customerDetails) {
         System.out.println("CustomerDetails getting added is " + customerDetails);
+        customerDetails.setAdminDetails(new AdminDetails());
+        BhishiDetails bhishiDetails = new BhishiDetails();
+        bhishiDetails.setLoanDetails(new LoanDetails());
+        customerDetails.setBhishiDetails(bhishiDetails);
+        customerDetails.setSecurityDocuments(new SecurityDocuments());
         CustomerDetails createdCustomerDetails = 	customerDetailsService.createCustomerDetails(customerDetails);
+
         return createdCustomerDetails;
     }
 

@@ -3,6 +3,7 @@ package rest.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -17,6 +18,10 @@ public class LoanDetails {
     private double principalAmount;
     private float interestPercent;
     private double repaidAmount;
+
+
+    @OneToOne(mappedBy = "loanDetails")
+    private  BhishiDetails bhishiDetails;
 
     public LoanDetails(LocalDateTime dateTime, String endDate, double principalAmount, float interestPercent, double repaidAmount) {
         this.dateTime = dateTime;
