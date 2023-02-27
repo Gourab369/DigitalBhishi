@@ -2,6 +2,8 @@ package rest.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 
 @Entity
 public class AdminDetails {
@@ -22,6 +24,9 @@ public class AdminDetails {
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) // attributes are necessary
     @JoinColumn(name="AddressId")
     private Addresses address;
+
+    @OneToMany(mappedBy = "adminDetails")
+    private Set<CustomerDetails> customerDetails;
 
     public AdminDetails(String firstName, String middleName, String lastName, String mobileNumber, String alternateNumber, String aadharNumber, String aadharPic, String panNumber, String panPic, Addresses address) {
 

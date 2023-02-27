@@ -3,6 +3,7 @@ package rest.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 import java.util.Objects;
 
@@ -16,6 +17,8 @@ public class SecurityDocuments {
     private String document3;
     private String document4;
 
+    @OneToOne(mappedBy = "securityDocuments")
+    private CustomerDetails customerDetails;
     public SecurityDocuments(String document1, String document2, String document3, String document4) {
         this.document1 = document1;
         this.document2 = document2;
