@@ -10,8 +10,8 @@ import rest.entity.LoginDetails;
 
 @Repository
 public interface LoginDetailsRepository extends JpaRepository<LoginDetails, Integer> {
-    @Transactional //Causes to start the transaction when the execution begins and end when it ends
-    @Modifying //Mandatory in order to support any DML operation
-    @Query("update LoanDetails l set l.username = :userName, l.password = :password, where l.loginId = :loginId")
-    void updateOneLoginDetails(Integer loginId, String userName, String password);
+//    @Transactional //Causes to start the transaction when the execution begins and end when it ends
+//    @Modifying //Mandatory in order to support any DML operation
+//    @Query("update LoanDetails l set l.username =: userName, l.password = :password, where l.loginId = :loginId")
+//    void updateOneLoginDetails(Integer loginId, String userName, String password);
 }

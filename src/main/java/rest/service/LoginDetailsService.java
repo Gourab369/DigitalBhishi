@@ -33,10 +33,10 @@ public class LoginDetailsService {
         loginDetailsRepo.deleteById(LoginDetailsId);
     }
 
-    public void updateOneLoginDetails(LoginDetails loginDetails) {
-        int logId = loginDetails.getLoginId();
-        String username = loginDetails.getUserName();
-        String password = loginDetails.getPassword();
-        loginDetailsRepo.updateOneLoginDetails(logId, username, password);
-    }
+//    public void updateOneLoginDetails(LoginDetails loginDetails) {
+//        int logId = loginDetails.getLoginId();
+//        String username = loginDetails.getUserName();
+//        String password = loginDetails.getPassword();
+//        loginDetailsRepo.updateOneLoginDetails(logId, username, password);
+//    }
 }
