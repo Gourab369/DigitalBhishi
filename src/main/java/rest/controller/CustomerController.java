@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 import rest.entity.*;
 import rest.entity.CustomerDetails;
 import rest.service.CustomerDetailsService;
-import rest.service.CustomerDetailsService;
 
 import java.util.List;
 
@@ -13,7 +12,7 @@ import java.util.List;
 public class CustomerController {
     @Autowired
     private CustomerDetailsService customerDetailsService;
-
+    @CrossOrigin(origins="http://localhost:3000")
     @GetMapping("/customerDetails-api/{CustomerId}")
     public CustomerDetails getOneCustomerDetails(@PathVariable("CustomerId") Integer customerDetailsId) {
         CustomerDetails foundCustomerDetails = customerDetailsService.getOneCustomerDetails(customerDetailsId);

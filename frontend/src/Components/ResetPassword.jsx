@@ -1,11 +1,11 @@
 import React from "react";
-import "./Home.js";
+import "./Home";
 
 
-function ResetPassword(){
+const ResetPassword=()=>{
     return <div  className="grid-container col-10 offset-3 mt-5">
         <h3>Reset Password</h3>
-       <div className="mb-3 row">
+      <div className="mb-3 row">
     <label for="username" className="col-sm-3 col-form-label">Enter Password</label>
     <div className="col-sm-4">
     <input type="text" className="form-control" id="username"/>
