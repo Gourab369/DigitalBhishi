@@ -1,6 +1,34 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import axios from 'axios';
 
-function Registration(){
+const Registration=()=>{
+  const [userNotExists, setUserNotExists] = useState(false);
+  const dataToVerifyy=0;
+  const [dataToVerify, setDataToVerify] = useState({
+    mobileNumber:"",
+    customerAadhar:"",
+    AdminAadhar:""
+  });
+  const handleGetOTP=()=>{
+    const mn = document.getElementById("mobileNumber").value;
+    const ca = document.getElementById("customerAadhar").value;
+    const aa = document.getElementById("AdminAadhar").value;
+    setDataToVerify(dataToVerify.mobileNumber=mn,dataToVerify.customerAadhar=ca,dataToVerify.AdminAadhar=aa);
+  console.log(dataToVerify);
+    //if generate otp fails show error
+  };
+  const api = axios.create({
+    baseURL:"http://localhost:8081"
+  });
+  useEffect(()=>{
+    api.post("/customerDetails-api",dataToVerify)
+    .then(response=>setUserNotExists(response.data))
+    .then(message=>console.log(message))
+    .catch(error=>console.log(error))
+  },[dataToVerifyy]);
+
+
+
     return <div className="col-6 offset-3">
         <h3>Registration Details</h3>
         <form>
@@ -27,9 +55,9 @@ function Registration(){
   </div>
 
   <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-5 col-form-label">Mobile Number</label>
+    <label for="mobileNumber" class="col-sm-5 col-form-label">Mobile Number</label>
     <div class="col-sm-6">
-      <input type="text" class="form-control" id="inputEmail3" placeholder="0000000000"/>
+      <input type="text" class="form-control" id="mobileNumber" placeholder="0000000000"/>
     </div>
   </div>
 
@@ -41,9 +69,9 @@ function Registration(){
   </div>
 
   <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-5 col-form-label">Aadhar</label>
+    <label for="customerAadhar" class="col-sm-5 col-form-label">Aadhar</label>
     <div class="col-sm-6">
-      <input type="text" class="form-control" id="inputEmail3" placeholder="000000000000"/>
+      <input type="text" class="form-control" id="customerAadhar" placeholder="000000000000"/>
     </div>
   </div>
 
@@ -58,6 +86,13 @@ function Registration(){
     <label for="inputEmail3" class="col-sm-5 col-form-label">Guarantor2 Aadhar</label>
     <div class="col-sm-6">
       <input type="text" class="form-control" id="inputEmail3" placeholder="000000000000"/>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="adminAadhar" class="col-sm-5 col-form-label">Admin Aadhar</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" id="adminAadhar" placeholder="000000000000"/>
     </div>
   </div>
 
@@ -157,7 +192,7 @@ function Registration(){
   </div>
 
   <div className="col-10 mb-3 row offset-2" >
-    <button type="button" className="btn btn-warning col-sm-3 col-form">Get OTP</button>
+    <button type="button" className="btn btn-warning col-sm-3 col-form" id="getOTP" onClick={handleGetOTP}>Get OTP</button>
     <div className="col-sm-6">
       <input type="text" className="form-control col-form-control" placeholder="Enter OTP"/>
     </div>

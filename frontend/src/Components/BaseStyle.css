@@ -1,0 +1,18 @@
+.displaymid{
+    width:50vw;
+}
+.endalign{
+    width:70vw;
+}
+.displayhori{
+    height: 50vh;
+}
+.displaytenper{
+    width: 10vw;
+}
+.sizemaintain{
+    min-width:3px;
+}
+.backblack{
+    background-color: black;
+}
