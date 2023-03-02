@@ -105,7 +105,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-		<finalName>Digital-Bhishi-Docker</finalName>
+		<finalName>digital-bhishi-docker</finalName>
 	</build>
 
 </project>
