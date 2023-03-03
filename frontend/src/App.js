@@ -17,12 +17,21 @@ import UserProfile from "./Components/userDashboard/UserProfile"
 import UserBhishi from "./Components/userDashboard/UserBhishi"
 import UserLoan from "./Components/userDashboard/UserLoan"
 
+import Login from "./Components/Login"
+import Registration from "./Components/Registration"
+import Home from "./Components/Home"
+import ForgetPassword from './Components/ForgetPassword';
+import ResetPassword from './Components/ResetPassword';
+import { Routes,Route } from 'react-router-dom';
+import './App.css';
+
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route index path="/" element={<Home/>}/>
+<<<<<<< HEAD
         <Route path="/login" element={<Login/>}/>
         <Route path="/registration" element={<Registration/>}/>
         <Route path="/forgetPassword" element={<ForgetPassword/>}/>
@@ -44,6 +53,12 @@ function App() {
          
         
      
+=======
+        <Route path="login" element={<Login/>}/>
+        <Route path="registration" element={<Registration/>}/>
+        <Route path="forgetPassword" element={<ForgetPassword/>}/>
+        <Route path="resetPassword" element={<ResetPassword/>}/>
+>>>>>>> 9a2d2f6d46eb5888612288cb9c071b8c13bb6649
       </Routes>
     </div>
   );

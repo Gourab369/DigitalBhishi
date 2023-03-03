@@ -48,5 +48,4 @@ public class CustomerController {
     public void updateOneCustomerDetails(@RequestBody CustomerDetails customerDetails) {
         customerDetailsService.updateOneCustomerDetails(customerDetails);
     }
-
 }
