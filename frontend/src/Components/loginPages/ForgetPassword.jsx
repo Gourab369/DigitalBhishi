@@ -1,6 +1,6 @@
 import React from "react";
 import "./ResetPassword";
-import './BaseStyle.css'
+import '../BaseStyle.css'
 import { useNavigate } from "react-router-dom";
 
 const ForgetPassword=()=>{

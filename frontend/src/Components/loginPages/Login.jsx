@@ -1,9 +1,26 @@
-import React from "react";
+import React,{useState} from "react";
 import "./ForgetPassword";
-import './BaseStyle.css'
+import '../BaseStyle.css'
+import { useNavigate } from "react-router-dom";
 
 const Login=()=>{
-    return<div> 
+  const [navigateTo,setNavigateTo]=useState(0);
+  const handleUserRadio=()=>{
+    setNavigateTo(1)
+  }
+  const handleAdminRadio=()=>{
+    setNavigateTo(2)
+  }
+  const navigator=useNavigate();
+  const handleNav=()=>{
+     if(navigateTo===1){
+       navigator("/userHome")}
+    else if(navigateTo===2){
+       navigator("/adminHome")}
+  }
+  const Getotp=()=>{}
+    return (<div> 
+
     <div className="grid-container col-7 offset-3 mt-5 displayhori">
       <h3 className="displaymid">Please Sign in</h3>
       <div className="mb-3 row">
@@ -25,11 +42,11 @@ const Login=()=>{
 
     <div className="offset-1 col-1">
       <div className="form-check">
-        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onChange={handleAdminRadio} />
         Admin
       </div>
       <div className="form-check">
-        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked/>
+        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onChange={handleUserRadio} required/>
         User
       </div>
     </div>
@@ -41,16 +58,13 @@ const Login=()=>{
     </div>
   </div>
 
-<div className="col-5 mt-3 displaymid">  
-    <button type="submit" className="btn btn-danger col-2">Login</button>
-</div>
-</div>
-</div>
+<div className="col-5 mt-3 displaymid">
+    <button type="submit" className="btn btn-danger col-2" onClick={handleNav}>Login</button>
+    </div>  
 
+      </div>
+</div>)
 
-function Getotp(){
-    
-}
 }
 
 export default Login;

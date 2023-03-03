@@ -1,10 +1,14 @@
 import React, {useEffect, useState} from "react";
+import "./GeneratePassword";
+import { useNavigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import http from '../httpCommon';
 import ValidationResult from './Validations'
 
 const Registration=()=>{
   const navigator=useNavigate();
+  function handleNav(){
+    navigator("/generatePassword")}
   const [otp, setOTP]= useState({
     otp:""
   });
@@ -285,13 +289,14 @@ const Registration=()=>{
 
   <div className="form-group row offset-4" >
     
+   <div class="col-sm-10">
+      <button type="submit" class="btn btn-primary" onClick={handleNav}>Register</button>
     <div className="col-sm-10">
       <button type="button" className="btn btn-primary"  name="btnRegister" onClick={handleRegister}>Register</button>
     </div>
   </div>
-</form>
-
-
+  </div>
+        </form>
     </div>
 }
 export default Registration;
