@@ -7,10 +7,11 @@ import rest.otp.SendOtp;
 import rest.otp.SendOtpPost;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class RegistrationController {
 
-    @GetMapping("/registration-generateOtp/{mobileNumber}")
-    public void generateOtp(HttpSession session, @PathVariable("mobileNumber") String mobileNumber) {
+    @PostMapping("/registration-generateOtp/")
+    public void generateOtp(HttpSession session, @RequestBody String mobileNumber) {
         Otp otp = new Otp();
         String otpMessage = otp.generateOtp(4);
         //System.out.println("Generated otp: " + otpMessage);

@@ -1,9 +1,16 @@
 import React, {useEffect, useState} from "react";
-import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import http from '../httpCommon';
+import ValidationResult from './Validations'
 
 const Registration=()=>{
-  const [otp, setOTP]= useState("");
-  const [checkCustomerNumberExists , setCheckCustomerNumberExists] = useState("");
+  const navigator=useNavigate();
+  const [otp, setOTP]= useState({
+    otp:""
+  });
+  const [checkCustomerNumberExists , setCheckCustomerNumberExists] = useState({
+    number:""
+  });
   var [dataToRegister, setDataToRegister] = useState({
     firstName:"",
     middleName:"",
@@ -16,141 +23,147 @@ const Registration=()=>{
     street:"",
     locality:"",
     villageOrCity:"",
-    tahashil:"",
+    tahsil:"",
     district:"",
     state:"",
     zipCode:"",
   });
-  const handleFirstName=(e)=>{
-    setDataToRegister({firstName:e.target.value})
-  }
-  const handleMiddleName=(e)=>{
-    setDataToRegister(data=>data.middleName=e.target.value)
-  }
-  const handleLastName=(e)=>{
-    setDataToRegister(data=>data.lastName=e.target.value)
-  }
-  const handlePrimaryNumber=(e)=>{
-    setDataToRegister({primaryNumber:e.target.value})
-  }
-  const handleAlternateNumber=(e)=>{
-    setDataToRegister(data=>data.alternateNumber=e.target.value)
-  }
-  const handleCustomerAadhar=(e)=>{
-    setDataToRegister(data=>data.customerAadharNumber=e.target.value)
-  }
-  const handleGuarantor1Aadhar=(e)=>{
-    setDataToRegister(data=>data.guarantor1AadharNumber=e.target.value)
-  
-  }
-  const handleGuarantor2Aadhar=(e)=>{
-    setDataToRegister(data=>data.guarantor2AadharNumber=e.target.value)
-  
-  }
-  const handleStreet=(e)=>{
-    setDataToRegister(data=>data.street=e.target.value)
-  
-  }
-  const handleLocality=(e)=>{
-    setDataToRegister(data=>data.locality=e.target.value)
-  
-  }
-  const handleVillageOrCity=(e)=>{
-    setDataToRegister(data=>data.villageOrCity=e.target.value)
-  }
-  const handleTahashil=(e)=>{
-    setDataToRegister(data=>data.tahashil=e.target.value)
-  
-  }
-  const handleDistrict=(e)=>{
-    setDataToRegister(data=>data.district=e.target.value)
-  
-  }
-  const handleState=(e)=>{
-    setDataToRegister(data=>data.state=e.target.value)
-  
-  }
-  const handleZipCode=(e)=>{
-    setDataToRegister(data=>data.zipCode=e.target.value)
-  
-  }
-  const handleOTP=(e)=>{
-    setOTP(e.target.value)
-  }
+
+  const onChange = (e)=> {
+    setDataToRegister({...dataToRegister, [e.target.name]: e.target.value});
+    }
+
+    const handleOTP=(e)=>{
+      setOTP({otp:e.target.value})
+    }
+
+  const [toDisable,setToDisable]=useState(false);// entry field
+  const [postPermission, setPostPermission]=useState(false);// permission for otp and dat posting
   const handleGetOTP=()=>{
-    setCheckCustomerNumberExists(dataToRegister.primaryNumber);
-    //if generate otp fails show error
+    setCheckCustomerNumberExists({number : dataToRegister.primaryNumber});
+    setToDisable(true);
+    console.log(dataToRegister)
   };
-
   useEffect(()=>{
-    axios.post("http://localhost:8081/customerDetails/posttest",checkCustomerNumberExists)
-    .then(response=>console.log(response.data))
+    http.post("/customerDetails/checkNumber",checkCustomerNumberExists)//change url afterwards
+    .then(response=>setPostPermission(response.data))//postPermisison source will only set when 
 
-  },[checkCustomerNumberExists]);
+    .catch(err=>console.log(err))
 
-  const handleRegister=()=>{
-    axios.post("http://localhost:8081/customerDetails/otp",otp)
-    .then(response=>console.log(response.data))
+    if(postPermission){
+      triggerUserExistError()
+      setToDisable(false)// entry fields editable
+    }else triggerCorrect()
+  },[checkCustomerNumberExists])
+  
+  const triggerUserExistError=()=>{
+  
   }
 
+  const triggerCorrect=()=>{
 
+  }
+  const [otpVerified, setOtpVerified]=useState(true);//tochange to false default
+  const  handleRegister=()=>{
+    if(true){//to change to postPermisison
+      http.post("/customerDetails/otp",otp)//change url afterwards
+      .then(response=>console.log(response.data))//use setOtpVerified here
+      .catch(err=>console.log(err))
+      
+      const dataConfirmation = window.confirm(
+        "Name --> "+ dataToRegister.firstName+" "+dataToRegister.middleName+" "+dataToRegister.lastName+"\n"+
+        "Aadhar --> "+dataToRegister.customerAadhar+"\n"+
+        "Number --> "+dataToRegister.primaryNumber+"\n"+
+        "Alternate Number --> "+dataToRegister.alternateNumber+"\n"+
+        "Guarantor 1 Aadhar --> "+dataToRegister.guarantor1Aadhar+"\n"+
+        "Guarantor 2 Aadhar --> "+dataToRegister.guarantor2Aadhar+"\n"+
+        "Address --> "+dataToRegister.street+", "+dataToRegister.locality+", "+dataToRegister.villageOrCity+", "+dataToRegister.district+", "+dataToRegister.tahsil+", "+dataToRegister.state+", "+dataToRegister.zipCode+", "+"\n"
+      ); // popup data
+
+      if(otpVerified&&dataConfirmation){
+        http.post("/customerDetails/postData",dataToRegister)//change url afterwards
+        .then(response=>console.log(response.data))//if true 
+        .catch(err=>console.log(err))
+        //show registered message
+        window.alert("Your Data has been saved")
+        navigator("/")
+      }else{
+        setToDisable(false)// entry fields editable
+        invalidOtpError();
+      }
+    }else triggerUserExistError();
+  }
+  const invalidOtpError=()=>{
+
+  }
+  const [determineWhatToShow,setDetermineWhatToShow]=useState(0);
+  
     return <div className="col-6 offset-3">
         <h3>Registration Details</h3>
-        <form>
+        <form className="needs-validation">
+        <fieldset id="toDisable" disabled={toDisable}>
 <h5>Personal Details</h5>
   <div className="form-group row">
     <label for="firstName" className="col-sm-5 col-form-label">First Name</label>
     <div className="col-sm-6">
-      <input type="text" className="form-control" id="firstName" placeholder="Rohan" onChange={handleFirstName} value={dataToRegister.firstName}/>
+      <input type="text" id="" className="form-control" name="firstName" placeholder="Rohan" onChange={onChange} value={dataToRegister.firstName} required/>
+    <ValidationResult condition={determineWhatToShow}/>
     </div>
   </div>
 
   <div className="form-group row">
     <label for="middleName" className="col-sm-5 col-form-label">Middle Name</label>
     <div className="col-sm-6">
-      <input type="text" className="form-control" id="middleName" placeholder="Ashok" onChange={handleMiddleName} value={dataToRegister.middleName}/>
+      <input type="text" className="form-control" name="middleName" placeholder="Ashok" onChange={onChange} value={dataToRegister.middleName}/>
+      <ValidationResult condition={determineWhatToShow}/>
     </div>
   </div>
 
   <div className="form-group row">
     <label for="lastName" className="col-sm-5 col-form-label">Last Name</label>
     <div className="col-sm-6">
-      <input type="text" className="form-control" id="lastName" placeholder="Shintre" onChange={handleLastName} value={dataToRegister.lastName}/>
+      <input type="text" className="form-control" name="lastName" placeholder="Shintre" onChange={onChange} value={dataToRegister.lastName} required/>
+      <ValidationResult condition={determineWhatToShow}/>
     </div>
   </div>
 
   <div className="form-group row">
     <label for="primaryNumber" className="col-sm-5 col-form-label">Mobile Number</label>
     <div className="col-sm-6">
-      <input type="text" className="form-control" id="primaryNumber" placeholder="0000000000" onChange={handlePrimaryNumber} value={dataToRegister.primaryNumber}/>
+      <input type="text" className="form-control" name="primaryNumber" placeholder="0000000000" onChange={onChange} value={dataToRegister.primaryNumber} required/>
+      <ValidationResult condition={determineWhatToShow}/>
     </div>
   </div>
 
   <div className="form-group row">
     <label for="alternateNumber" className="col-sm-5 col-form-label">Alternate Mobile</label>
     <div className="col-sm-6">
-      <input type="text" className="form-control" id="alternateNumber" placeholder="0000000000" onChange={handleAlternateNumber} value={dataToRegister.alternateNumber}/>
+      <input type="text" className="form-control" name="alternateNumber" placeholder="0000000000" onChange={onChange} value={dataToRegister.alternateNumber}/>
+      <ValidationResult condition={determineWhatToShow}/>
     </div>
   </div>
 
   <div className="form-group row">
     <label for="customerAadhar" className="col-sm-5 col-form-label">Aadhar</label>
     <div className="col-sm-6">
-      <input type="text" className="form-control" id="customerAadhar" placeholder="000000000000" onChange={handleCustomerAadhar} value={dataToRegister.customerAadhar}/>
+      <input type="text" className="form-control" name="customerAadhar" placeholder="000000000000" onChange={onChange} value={dataToRegister.customerAadhar} required/>
+      <ValidationResult condition={determineWhatToShow}/>
     </div>
   </div>
 
   <div className="form-group row">
     <label for="guarantor1Aadhar" className="col-sm-5 col-form-label">Guarantor1 Aadhar</label>
     <div className="col-sm-6">
-      <input type="text" className="form-control" id="guarantor1Aadhar" placeholder="000000000000" onChange={handleGuarantor1Aadhar} value={dataToRegister.guarantor1Aadhar}/>
+      <input type="text" className="form-control" name="guarantor1Aadhar" placeholder="000000000000" onChange={onChange} value={dataToRegister.guarantor1Aadhar} required/>
+      <ValidationResult condition={determineWhatToShow}/>
     </div>
   </div>
 
   <div className="form-group row">
     <label for="guarantor2Aadhar" className="col-sm-5 col-form-label">Guarantor2 Aadhar</label>
     <div className="col-sm-6">
-      <input type="text" className="form-control" id="guarantor2Aadhar" placeholder="000000000000" onChange={handleGuarantor2Aadhar} value={dataToRegister.guarantor2Aadhar}/>
+      <input type="text" className="form-control" name="guarantor2Aadhar" placeholder="000000000000" onChange={onChange} value={dataToRegister.guarantor2Aadhar} required/>
+      <ValidationResult condition={determineWhatToShow}/>
     </div>
   </div>
 
@@ -158,51 +171,58 @@ const Registration=()=>{
   <div className="form-group row">
     <label for="street" className="col-sm-5 col-form-label">Street</label>
     <div className="col-sm-6">
-      <input type="text" className="form-control" id="street" placeholder="Paud Road" onChange={handleStreet} value={dataToRegister.street}/>
+      <input type="text" className="form-control" name="street" placeholder="Paud Road" onChange={onChange} value={dataToRegister.street} required/>
+      <ValidationResult condition={determineWhatToShow}/>
     </div>
   </div>
 
   <div className="form-group row">
     <label for="locality" className="col-sm-5 col-form-label">Locality</label>
     <div className="col-sm-6">
-      <input type="text" className="form-control" id="locality" placeholder="Rambaug Colony" onChange={handleLocality} value={dataToRegister.locality}/>
+      <input type="text" className="form-control" name="locality" placeholder="Rambaug Colony" onChange={onChange} value={dataToRegister.locality} required/>
+      <ValidationResult condition={determineWhatToShow}/>
     </div>
   </div>
 
   <div className="form-group row">
     <label for="villageOrCity" className="col-sm-5 col-form-label">Village/City</label>
     <div className="col-sm-6">
-      <input type="text" className="form-control" id="villageOrCity" placeholder="Pune" onChange={handleVillageOrCity} value={dataToRegister.villageOrCity}/>
+      <input type="text" className="form-control" name="villageOrCity" placeholder="Pune" onChange={onChange} value={dataToRegister.villageOrCity} required/>
+      <ValidationResult condition={determineWhatToShow}/>
     </div>
   </div>
 
 
 
   <div className="form-group row">
-    <label for="tahshil" className="col-sm-5 col-form-label">Tahshil</label>
+    <label for="tahsil" className="col-sm-5 col-form-label">tahsil</label>
     <div className="col-sm-6">
-      <input type="text" className="form-control" id="tahshil" placeholder="Pune" onChange={handleTahashil} value={dataToRegister.tahashil}/>
+      <input type="text" className="form-control" name="tahsil" placeholder="Pune" onChange={onChange} value={dataToRegister.tahsil} required/>
+      <ValidationResult condition={determineWhatToShow}/>
     </div>
   </div>
 
   <div className="form-group row">
     <label for="district" className="col-sm-5 col-form-label">District</label>
     <div className="col-sm-6">
-      <input type="text" className="form-control" id="district" placeholder="Pune" onChange={handleDistrict} value={dataToRegister.district}/>
+      <input type="text" className="form-control" name="district" placeholder="Pune" onChange={onChange} value={dataToRegister.district} required/>
+      <ValidationResult condition={determineWhatToShow}/>
     </div>
   </div>
 
   <div className="form-group row">
     <label for="state" className="col-sm-5 col-form-label">State</label>
     <div className="col-sm-6">
-      <input type="text" className="form-control" id="state" placeholder="Maharashtra" onChange={handleState} value={dataToRegister.state}/>
+      <input type="text" className="form-control" name="state" placeholder="Maharashtra" onChange={onChange} value={dataToRegister.state} required/>
+      <ValidationResult condition={determineWhatToShow}/>
     </div>
   </div>
 
   <div className="form-group row">
     <label for="zipCode" className="col-sm-5 col-form-label">Zip Code</label>
     <div className="col-sm-6">
-      <input type="text" className="form-control" id="zipCode" placeholder="411046" onChange={handleZipCode} value={dataToRegister.zipCode}/>
+      <input type="text" className="form-control" name="zipCode" placeholder="411046" onChange={onChange} value={dataToRegister.zipCode} required/>
+      <ValidationResult condition={determineWhatToShow}/>
     </div>
   </div>
 
@@ -210,56 +230,63 @@ const Registration=()=>{
   <div className="form-group row">
     <label for="customerAadharPic" className="col-sm-5 col-form-label">User Aadhar</label>
     <div className="col-sm-6">
-    <input type="file" className="custom-file-input" id="customerAadharPic"/>
+    <input type="file" className="custom-file-input" name="customerAadharPic"/>
+    <ValidationResult condition={determineWhatToShow}/>
     </div>
   </div>
 
   <div className="form-group row">
     <label for="undertakingFormPic" className="col-sm-5 col-form-label">Undertaking Form</label>
     <div className="col-sm-6">
-    <input type="file" className="custom-file-input" id="undertakingFormPic"/>
+    <input type="file" className="custom-file-input" name="undertakingFormPic"/>
+    <ValidationResult condition={determineWhatToShow}/>
     </div>
   </div>
 
   <div className="form-group row">
     <label for="cattleCertificate" className="col-sm-5 col-form-label">Cattle certificate</label>
     <div className="col-sm-6">
-    <input type="file" className="custom-file-input" id="cattleCertificate"/>
+    <input type="file" className="custom-file-input" name="cattleCertificate"/>
+    <ValidationResult condition={determineWhatToShow}/>
     </div>
   </div>
 
   <div className="form-group row">
     <label for="otherDocument1" className="col-sm-5 col-form-label">Other Document 1</label>
     <div className="col-sm-6">
-    <input type="file" className="custom-file-input" id="otherDocument1"/>
+    <input type="file" className="custom-file-input" name="otherDocument1"/>
+    <ValidationResult condition={determineWhatToShow}/>
     </div>
   </div>
 
   <div className="form-group row">
     <label for="otherDocument2" className="col-sm-5 col-form-label">Other Document 2</label>
     <div className="col-sm-6">
-    <input type="file" className="custom-file-input" id="otherDocument2"/>
+    <input type="file" className="custom-file-input" name="otherDocument2"/>
+    <ValidationResult condition={determineWhatToShow}/>
     </div>
   </div>
 
   <div className="form-group row">
     <label for="otherDocument3" className="col-sm-5 col-form-label">Other Document 3</label>
     <div className="col-sm-6">
-    <input type="file" className="custom-file-input" id="otherDocument3"/>
+    <input type="file" className="custom-file-input" name="otherDocument3"/>
+    <ValidationResult condition={determineWhatToShow}/>
     </div>
   </div>
-
+</fieldset>
   <div className="col-10 mb-3 row offset-2" >
-    <button type="button" className="btn btn-warning col-sm-3 col-form" id="btnGetOTP" onClick={handleGetOTP}>Get OTP</button>
+    <button type="button" className="btn btn-warning col-sm-3 col-form" name="btnGetOTP" onClick={handleGetOTP}>Get OTP</button>
     <div className="col-sm-6">
-      <input type="text" className="form-control col-form-control" placeholder="Enter OTP" onChange={handleOTP} value={otp}/>
+      <input type="text" className="form-control col-form-control" placeholder="Enter OTP" onChange={handleOTP} value={otp.otp} required/>
+      <ValidationResult condition={determineWhatToShow}/>
     </div>
   </div>
 
   <div className="form-group row offset-4" >
     
     <div className="col-sm-10">
-      <button type="button" className="btn btn-primary"  id="btnRegister" onClick={handleRegister}>Register</button>
+      <button type="button" className="btn btn-primary"  name="btnRegister" onClick={handleRegister}>Register</button>
     </div>
   </div>
 </form>

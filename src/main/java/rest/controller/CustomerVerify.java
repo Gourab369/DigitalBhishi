@@ -11,6 +11,16 @@ public class CustomerVerify {
         aadharNumber="111111111111";
         adminAadharNumber="111111111111";
     }
+
+    @Override
+    public String toString() {
+        return "CustomerVerify{" +
+                "mobileNumber='" + mobileNumber + '\'' +
+                ", aadharNumber='" + aadharNumber + '\'' +
+                ", adminAadharNumber='" + adminAadharNumber + '\'' +
+                '}';
+    }
+
     public CustomerVerify(String mobileNumber, String aadharNumber, String adminAadharNumber) {
         this.mobileNumber = mobileNumber;
         this.aadharNumber = aadharNumber;
