@@ -16,3 +16,7 @@
 .backblack{
     background-color: black;
 }
+
+.fexbloxstuff{
+    display:flex;
+}

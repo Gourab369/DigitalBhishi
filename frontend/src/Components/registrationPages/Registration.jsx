@@ -1,7 +1,12 @@
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
+import "./GeneratePassword";
+import { useNavigate } from "react-router-dom";
 
 const Registration=()=>{
+  const navigator=useNavigate();
+  function handleNav(){
+    navigator("/generatePassword")}
   const [userNotExists, setUserNotExists] = useState(false);
   const dataToVerifyy=0;
   const [dataToVerify, setDataToVerify] = useState({
@@ -201,12 +206,12 @@ const Registration=()=>{
   <div class="form-group row offset-4" >
     
     <div class="col-sm-10">
-      <button type="submit" class="btn btn-primary">Register</button>
+      <button type="submit" class="btn btn-primary" onClick={handleNav}>Register</button>
     </div>
   </div>
-</form>
-
+        </form>
 
     </div>
 }
+
 export default Registration;
