@@ -13,10 +13,10 @@ const Login=()=>{
   }
   const navigator=useNavigate();
   const handleNav=()=>{
-     if(navigateTo===1){
-       navigator("/userHome")}
+    if(navigateTo===1){
+      navigator("/userHome")}
     else if(navigateTo===2){
-       navigator("/adminHome")}
+      navigator("/adminHome")}
   }
   const Getotp=()=>{}
     return (<div> 

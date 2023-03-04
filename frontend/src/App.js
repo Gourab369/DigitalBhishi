@@ -7,22 +7,16 @@ import Registration from "./Components/registrationPages/Registration"
 import GeneratePassword from "./Components/registrationPages/GeneratePassword";
 import Home from "./Components/Home"
 
-import AdminHome from "./Components/admindashboard/AdminHome"
-import AdminProfile from "./Components/admindashboard/AdminProfile"
-import AdminCustomers from "./Components/admindashboard/AdminCustomers"
-import AdminRequest from "./Components/admindashboard/AdminRequest"
+import AdminHome from "./Components/adminDashboard/AdminHome"
+import AdminProfile from "./Components/adminDashboard/AdminProfile"
+import AdminCustomers from "./Components/adminDashboard/AdminCustomers"
+import AdminRequest from "./Components/adminDashboard/AdminRequest"
 
 import UserHome from "./Components/userDashboard/UserHome"
 import UserProfile from "./Components/userDashboard/UserProfile"
 import UserBhishi from "./Components/userDashboard/UserBhishi"
 import UserLoan from "./Components/userDashboard/UserLoan"
 
-import Login from "./Components/Login"
-import Registration from "./Components/Registration"
-import Home from "./Components/Home"
-import ForgetPassword from './Components/ForgetPassword';
-import ResetPassword from './Components/ResetPassword';
-import { Routes,Route } from 'react-router-dom';
 import './App.css';
 
 
@@ -31,7 +25,6 @@ function App() {
     <div className="App">
       <Routes>
         <Route index path="/" element={<Home/>}/>
-<<<<<<< HEAD
         <Route path="/login" element={<Login/>}/>
         <Route path="/registration" element={<Registration/>}/>
         <Route path="/forgetPassword" element={<ForgetPassword/>}/>
@@ -50,15 +43,6 @@ function App() {
         <Route path="/userbhishi" element={<UserBhishi/>}/>
         <Route path="/userLoan" element={<UserLoan/>}/>
 
-         
-        
-     
-=======
-        <Route path="login" element={<Login/>}/>
-        <Route path="registration" element={<Registration/>}/>
-        <Route path="forgetPassword" element={<ForgetPassword/>}/>
-        <Route path="resetPassword" element={<ResetPassword/>}/>
->>>>>>> 9a2d2f6d46eb5888612288cb9c071b8c13bb6649
       </Routes>
     </div>
   );

@@ -1,108 +1,50 @@
 import { HiXCircle, HiCheckCircle } from "react-icons/hi";
 const ValidationResult=(props)=>{
     if(props.condition===0){
-        return <span></span>
-    }else if(props.condition===1){return <HiCheckCircle className="col" size="2rem" color="green" display="block"/>
-    }else return <HiXCircle className="col" size="2rem" color="red" display="block"/>
+        return <span className="col"></span>
+    }else if(props.condition===1){return <HiCheckCircle className="col" size="2rem" color="green" display="inline"/>
+    }else return <HiXCircle className="col" size="2rem" color="red" display="inline"/>
 }
 
-//
 
-// function validateNamefields(text){
+function ValidateTextFields(text){
+    let testText=/^[a-z]+$/i
+    if(text.match(testText)){
+        return 1;
+    }
+    return 2;
+}
 
-// }
-// function validate(){
-//     if(valfname() && vallname() && valgender() && valeducation() && valemail() && checkworkxp() && num()) display(1)
-// }
-// function valfname(){
-//     let fname=document.getElementById("fname").value
-//     let testn=/^[a-zA-Z]+$/
-//     if(!fname.match(testn)){
-//         document.getElementById("errfname").innerHTML="Alphabets Only"
-//         return false
-//     }else{
-//         document.getElementById("errfname").innerHTML=""
-//         return true
-//     }
-// }
-// function vallname(){
-//     let lname=document.getElementById("lname").value
-//     let testn=/^[a-zA-Z]+$/
-//     if(!lname.match(testn)){
-//         document.getElementById("errlname").innerHTML="Alphabets Only"
-//         return false
-//     }else{
-//         document.getElementById("errlname").innerHTML=""
-//         return true
-//     }
-// }
-// function valgender(){
-//     let em=document.getElementById("education").value
-//     let teste=/^[female]|[Male]|[others]$/i
-//     let testee=/^[other]|[others]$/i
-//     if(!em.match(teste)){
-//         document.getElementById("erreducation").innerHTML="Invalid education qualification"
-//         return false
-//     }else{
-//         document.getElementById("erreducation").innerHTML=""
-//         return true
-//     }
-// }
-// function valeducation(){
-//     let em=document.getElementById("education").value
-//     let teste=/^[10]|[12]|[Diploma]|[Graduation]$/i
-//     if(!em.match(teste)){
-//         document.getElementById("erreducation").innerHTML="Invalid education qualification"
-//         return false
-//     }else{
-//         document.getElementById("erreducation").innerHTML=""
-//         return true
-//     }
-// }
-// function num(){
-//     let em=document.getElementById("phone").value
-//     let teste=/^[0-9]{10,10}$/
-//     if(!em.match(teste)){
-//         document.getElementById("errphone").innerHTML="Invalid phone number"
-//         return false
-//     }else{
-//         document.getElementById("errphone").innerHTML=""
-//         return true
-//     }
-// }
-// function valemail(){
-//     let em=document.getElementById("email").value
-//     let teste=/^([a-zA-Z0-9_#+]+)@([a-zA-Z]+)\.([a-zA-Z]{2,3})$/
-//     if(!em.match(teste)){
-//         document.getElementById("erremail").innerHTML="Invalid email format"
-//         return false
-//     }else{
-//         document.getElementById("erremail").innerHTML=""
-//         return true
-//     }
-// }
-// function checkworkxp(){
-//     let xp=parseInt(document.getElementById("workxp").value)
-//     if(xp<1){
-//         document.getElementById("errxp").innerHTML="not Eligible, should have atleast 1 year of experience"
-//         return false
-//     }else{
-//         document.getElementById("errxp").innerHTML=""
-//         return true
-//     }
-// }
-// document.getElementById("country").onchange=()=>{
-//     let con=document.getElementById("country").value
-//     if(con=="others")
-//     {
-//         document.getElementById("othersc").style="display:inline"
-//     }
-//     else{
-//         document.getElementById("othersc").style="display:none"
-//     }
-// }
-// function display(n){
-//     if(n) window.alert("Data inserted successfully")
-// }
+function ValidatePhoneNumberFields(text){
+    let testText=/^[0-9]{10,10}$/
+    if(text.match(testText)){
+        return 1;
+    }
+    return 2;
+}
 
-export default ValidationResult;
+function ValidateAadharNumberFields(text){
+    let testText=/^[0-9]{12,12}$/
+    if(text.match(testText)){
+        return 1;
+    }
+    return 2;
+}
+
+function ValidateZipCodeFields(text){
+    let testText=/^[0-9]{6,6}$/
+    if(text.match(testText)){
+        return 1;
+    }
+    return 2;
+}
+
+function ValidatePicFormats(file){
+    let testText=/\.[png|jpg|jpeg|pdf]$/i
+    if(file.match(testText)&&((parseFloat(file.file[0].size/1024).toFixed(2))<=1)){
+        return 1;
+    }
+    return 2;
+}
+
+export { ValidationResult, ValidateTextFields, ValidatePhoneNumberFields, ValidatePicFormats, ValidateZipCodeFields, ValidateAadharNumberFields};
