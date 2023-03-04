@@ -237,7 +237,6 @@ const Registration=()=>{
     <label for="street" className="col-sm-5 col-form-label">Street</label>
     <div className="col-sm-6">
       <input type="text" className="form-control" name="street" placeholder="Paud Road" onBlur={onBlur} onChange={onChange} value={dataToRegister.street} required/>
-      <ValidationResult condition={validationStatus.street}/>
     </div>
   </div>
 
@@ -245,7 +244,6 @@ const Registration=()=>{
     <label for="locality" className="col-sm-5 col-form-label">Locality</label>
     <div className="col-sm-6">
       <input type="text" className="form-control" name="locality" placeholder="Rambaug Colony" onBlur={onBlur} onChange={onChange} value={dataToRegister.locality} required/>
-      <ValidationResult condition={validationStatus.locality}/>
     </div>
   </div>
 
@@ -253,7 +251,6 @@ const Registration=()=>{
     <label for="villageOrCity" className="col-sm-5 col-form-label">Village/City</label>
     <div className="col-sm-6">
       <input type="text" className="form-control" name="villageOrCity" placeholder="Pune" onBlur={onBlur} onChange={onChange} value={dataToRegister.villageOrCity} required/>
-      <ValidationResult condition={validationStatus.villageOrCity}/>
     </div>
   </div>
 
@@ -263,7 +260,6 @@ const Registration=()=>{
     <label for="tahsil" className="col-sm-5 col-form-label">tahsil</label>
     <div className="col-sm-6">
       <input type="text" className="form-control" name="tahsil" placeholder="Pune" onBlur={onBlur} onChange={onChange} value={dataToRegister.tahsil} required/>
-      <ValidationResult condition={validationStatus.tahsil}/>
     </div>
   </div>
 
@@ -271,7 +267,6 @@ const Registration=()=>{
     <label for="district" className="col-sm-5 col-form-label">District</label>
     <div className="col-sm-6">
       <input type="text" className="form-control" name="district" placeholder="Pune" onBlur={onBlur} onChange={onChange} value={dataToRegister.district} required/>
-      <ValidationResult condition={validationStatus.district}/>
     </div>
   </div>
 
@@ -279,7 +274,6 @@ const Registration=()=>{
     <label for="state" className="col-sm-5 col-form-label">State</label>
     <div className="col-sm-6">
       <input type="text" className="form-control" name="state" placeholder="Maharashtra" onBlur={onBlur} onChange={onChange} value={dataToRegister.state} required/>
-      <ValidationResult condition={validationStatus.state}/>
     </div>
   </div>
 
