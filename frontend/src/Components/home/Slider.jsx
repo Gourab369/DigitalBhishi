@@ -2,9 +2,9 @@ import React from 'react'
 
 function Slider() {
 return (
-    <div className='d-flex justify-content-center' >
+    <div className="d-flex" >
         <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
-        <div className="carousel-inner">
+        <div className="carousel-inner slidersizer">
             <div className="carousel-item active">
             <img src="slide1.avif" className="d-block " alt="..." style={{height :"100vh" ,width:"98vw"}}/>
             </div>

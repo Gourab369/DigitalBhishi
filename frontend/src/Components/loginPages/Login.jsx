@@ -2,6 +2,8 @@ import React,{useState} from "react";
 import "./ForgetPassword";
 import '../BaseStyle.css'
 import { useNavigate } from "react-router-dom";
+import BaseLayout from "../BaseLayout";
+import Footer from '../home/Footer';
 
 const Login=()=>{
   const [navigateTo,setNavigateTo]=useState(0);
@@ -19,51 +21,58 @@ const Login=()=>{
       navigator("/adminHome")}
   }
   const Getotp=()=>{}
-    return (<div> 
-
-    <div className="grid-container col-7 offset-3 mt-5 displayhori">
-      <h3 className="displaymid">Please Sign in</h3>
-      <div className="mb-3 row">
-    <label for="username" className="col-sm-3 col-form-label">User Name</label>
-    <div className="col-sm-6">
+    return (
+    <>
+    <div className="row"> 
+    <BaseLayout/>
+    </div>
+    <div className="row col-4 offset-4 mt-5 mb-5 bg-light p-4 border">
+      <form className="row g-3">
+      <h3 className="text-center">Please Sign in</h3>
+    <div className="col-12 d-flex flex-row">
+    <img class="mt-2 me-2" src="https://cdn-icons-png.flaticon.com/512/456/456212.png" style={{height: "20px", width: "20px"}}/>
     <input type="text" className="form-control" id="username"/>
     </div>
-  </div>
-  <div className="mb-3 row">
-    <label for="inputPassword" className="col-sm-3 col-form-label">Password</label>
-    <div className="col-sm-6">
+    <div className="col-12 d-flex flex-row">
+    <img class="mt-2 me-2" src="https://cdn-icons-png.flaticon.com/512/3064/3064155.png" style={{height: "20px", width: "20px"}}/>
       <input type="password" className="form-control" id="inputPassword"/>
-    </div>
   </div>
 
-  <div className="endalign">
-  <a href="forgetpassword"><h6>Forget password</h6></a>
+  <div className="text-end mt-2 mb-1">
+  <a href="forgetpassword" className="btn" style={{color:"blue"}}><h6>Forget password/Reset Password</h6></a>
   </div>
 
-    <div className="offset-1 col-1">
-      <div className="form-check">
-        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onChange={handleAdminRadio} />
-        Admin
+    <div className="row text-center">
+
+      <div className="form-check col d-flex flex-row">
+        <input className="form-check-input radios" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onChange={handleAdminRadio}/>
+        <div className="flex-row radiolabels">Admin</div>
       </div>
-      <div className="form-check">
-        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onChange={handleUserRadio} required/>
-        User
+
+      <div className="form-check col d-flex flex-row">
+        <input className="form-check-input radios" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onChange={handleUserRadio} required  />
+        <div className="flex-row radiolabels">User</div>
       </div>
     </div>
 
-<div className="col-10 mb-3 row offset-1 displaymid mt-3" >
-    <button type="button" className="btn btn-warning col-sm-3 col-form displaytenper"onClick={Getotp}>Get OTP</button>
-    <div className="col-sm-6">
-      <input type="text" className="form-control col-form-control ms-3" placeholder="Enter OTP"/>
+<div className="row mt-3 mb-2 ms-3" >
+    <button type="button" className="btn btn-warning col-form flex-row col-4"onClick={Getotp}>Get OTP</button>
+    <div className="col">
+      <input type="text" className="form-control col-form-control col-8 flex-row" placeholder="Enter OTP"/>
     </div>
   </div>
 
-<div className="col-5 mt-3 displaymid">
-    <button type="submit" className="btn btn-danger col-2" onClick={handleNav}>Login</button>
+<div className="col-12 mt-3 text-center">
+    <button type="submit" className="btn btn-danger flex-row" onClick={handleNav}>Login</button>
     </div>  
-
+      </form>
       </div>
-</div>)
+
+      <div className="row">
+      <Footer/>
+      </div>
+</>
+)
 
 }
 

@@ -1,5 +1,6 @@
 import { Routes,Route } from 'react-router-dom';
 import './App.css';
+import './Components/home/Home.css';
 import Login from "./Components/loginPages/Login"
 import ForgetPassword from './Components/loginPages/ForgetPassword';
 import ResetPassword from './Components/loginPages/ResetPassword';
@@ -24,7 +25,7 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App container-fluid bgimage">
       <Routes>
         <Route index path="/" element={<Home/>}/>
         <Route path="/login" element={<Login/>}/>

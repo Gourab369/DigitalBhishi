@@ -1,27 +1,43 @@
 import React from "react";
 import "../home/Home";
+import BaseLayout from "../BaseLayout";
+import Footer from "../home/Footer";
+import { useNavigate } from "react-router-dom";
 
 
 const ResetPassword=()=>{
-    return <div  className="grid-container col-10 offset-3 mt-5">
+  const navigator=useNavigate();
+  const handleHome=()=>{
+    alert("Your Password has been reset");
+    navigator('/')
+  }
+    return <>
+    <div className="row">
+      <BaseLayout/>
+    </div>
+    <div  className="row col-4 p-5 offset-4 bg-light mt-5 mb-5 border text-center">
         <h3>Reset Password</h3>
+      <div className="row mb-3">
+        <div className="col-12 flex-row">
+          <input type="text" className="form-control" id="username" placeholder="New Password"/>
+        </div>
+      </div>
       <div className="mb-3 row">
-    <label for="username" className="col-sm-3 col-form-label">Enter Password</label>
-    <div className="col-sm-4">
-    <input type="text" className="form-control" id="username"/>
-    </div>
-  </div>
-  <div className="mb-3 row">
-    <label for="inputPassword" className="col-sm-3 col-form-label">Password</label>
-    <div className="col-sm-4">
-      <input type="password" className="form-control" id="inputPassword"/>
-    </div>
-  </div>
+        <div className="col-12 flex-row">
+          <input type="password" className="form-control" id="inputPassword" placeholder="Confirm Password"/>
+        </div>
+      </div>
 
-  <div className="col-4 mt-3 offset-4">
-     <a class="btn btn-danger" href="http://localhost:3000/" role="button">Submit</a>
+  <div className="col-4 mt-3 mb-3 offset-4">
+      <a class="btn btn-danger" role="button" onClick={handleHome}>Submit</a>{//change this link to a fucntion
+      }
     </div>
 
     </div>
+    <div className="row">
+      <Footer/>
+    </div>
+
+    </>
 }
 export default ResetPassword;
