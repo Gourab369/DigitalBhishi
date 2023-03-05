@@ -1,5 +1,4 @@
 import React from "react";
-import Home from "../Home";
 import '../BaseStyle.css'
 
 
@@ -21,7 +20,7 @@ const GeneratePassword =()=>{
   </div>
 
   <div className="col-4 mt-3 offset-4">
-     <a class="btn btn-danger" href="http://localhost:3000/" role="button">Submit</a>
+    <a class="btn btn-danger" href="http://localhost:3000/" role="button">Submit</a>
     </div>
 
     </div>
