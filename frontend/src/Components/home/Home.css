@@ -34,18 +34,35 @@
     border-color:coral;
 }
 
-.buttons{
-    margin:0px;
-    padding:0px;
-
+hr{
+    margin:.1rem;
+    width:98vw;
+    
 }
 
-.ff{
+.paddremove{
     padding:0;
-
+    margin:0;
 }
-
-.slider{
+.linkbar{
+    margin:0;
     padding:0;
 }
+.shadefortitlebar{
+background: radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, rgba(4, 12, 24, 1) 25%);
+}
 
+.bg-light {
+    background-color: #f8f9fa!important;
+}
+
+.radios{
+    outline: auto;
+    position:relative;
+    left:60px;
+    
+}
+.radiolabels{
+    position:relative;
+    left: 70px;
+}
