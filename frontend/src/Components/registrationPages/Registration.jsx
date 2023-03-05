@@ -69,10 +69,9 @@ const Registration=()=>{
   useEffect(()=>{
     http.post("/customerDetails/checkNumber",checkCustomerNumberExists)//change url afterwards
     .then(response=>setPostPermission(response.data))//postPermisison source will only set when 
-
     .catch(err=>console.log(err))
 
-    if(postPermission){
+    if(!postPermission){
       triggerUserExistError()
       setToDisable(false)// entry fields editable
     }else triggerCorrect()
@@ -135,7 +134,6 @@ const Registration=()=>{
     guarantor1Aadhar:0,
     guarantor2Aadhar:0,
     zipCode:0,
-    otp:0,
     customerAadharPic:0,
     undertakingFormPic:0,
     cattleCertificate:0,
@@ -337,7 +335,7 @@ const Registration=()=>{
   <div className="col-10 mb-3 row offset-2" >
     <button type="button" className="btn btn-warning col-sm-3 col-form" name="btnGetOTP" onClick={handleGetOTP}>Get OTP</button>
     <div className="col-sm-6">
-      <input type="text" className="form-control col-form-control" name="otp" placeholder="Enter OTP" onBlur={onBlur} onChange={handleOTP} value={otp.otp} required/>
+      <input type="text" className="form-control col-form-control" name="otp" placeholder="Enter OTP" onChange={handleOTP} value={otp.otp} required/>
     </div>
   </div>
 

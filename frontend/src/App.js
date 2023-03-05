@@ -5,7 +5,7 @@ import ForgetPassword from './Components/loginPages/ForgetPassword';
 import ResetPassword from './Components/loginPages/ResetPassword';
 import Registration from "./Components/registrationPages/Registration"
 import GeneratePassword from "./Components/registrationPages/GeneratePassword";
-import Home from "./Components/Home"
+import Home from "./Components/home/Home"
 
 import AdminHome from "./Components/adminDashboard/AdminHome"
 import AdminProfile from "./Components/adminDashboard/AdminProfile"
@@ -16,6 +16,8 @@ import UserHome from "./Components/userDashboard/UserHome"
 import UserProfile from "./Components/userDashboard/UserProfile"
 import UserBhishi from "./Components/userDashboard/UserBhishi"
 import UserLoan from "./Components/userDashboard/UserLoan"
+
+
 
 import './App.css';
 

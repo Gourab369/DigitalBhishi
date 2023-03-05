@@ -1,0 +1,51 @@
+.bgimage{
+    font-family: light;
+    background-color: burlywood;
+    background-Image: url("../../assets/images/backgroundPatern.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height:100vh;
+    width:100%;
+    background-blend-mode:screen;
+}
+
+.title{
+    padding-top: 1rem;
+    padding-left: 2rem;
+    font-size:40px;
+    background-image: url(../../assets/images/backgroundPattern1.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+
+.titlelogo{
+    height:33px;
+    width:33px;
+    margin-bottom: .4rem;
+    margin-right: .6rem;
+    border-radius: 50%;
+    border-style:hidden;
+
+}
+
+.titlebar{
+    border-bottom: 1rem;
+    border-color:coral;
+}
+
+.buttons{
+    margin:0px;
+    padding:0px;
+
+}
+
+.ff{
+    padding:0;
+
+}
+
+.slider{
+    padding:0;
+}
+
