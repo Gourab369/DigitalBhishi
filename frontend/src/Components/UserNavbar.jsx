@@ -23,19 +23,21 @@ const handleLogout=()=>{
 }
 
     return (
-      <div>
-        <nav className="navbar fixed-top navbar-dark bg-dark">
-      <div className="container-fluid justify-content-start">
-      <button type="button" className="btn btn-primary btn-lg me-5" onClick={handleLogout}>Logout</button>
-      <button className="btn btn-outline-success me-5" type="button" onClick={handleHome}>Home</button>
-      <button className="btn btn-outline-success me-5" type="button" onClick={handleProfile}>Profile</button>
-      <button className="btn btn-outline-success me-5" type="button" onClick={handleBhishi}>MY Bhishi</button>
-      <button className="btn btn-outline-warning me-" type="button" onClick={handleLoan}> Loans</button>     
+      <div className="header ">
+      <div className="title row" >
+          <div className="titlebar col mb-2">
+          <img className="titlelogo" src="logo.jpg" />Customer Portal</div>
       </div>
-        </nav>
-    <>
-    {children}</>
-  </div>      
+      <hr/>
+      
+      <div className="row grid-container">
+              <a  className="btn btn-primary col-1 text-start text-center me-2" onClick={handleLogout} >LOGOUT </a>
+              <a  className="btn btn-outline-secondary col-1 text-center me-2" onClick={handleHome}>HOME</a>
+              <a  className="btn btn-outline-secondary col-1 text-center me-2" onClick={handleProfile} >PROFILE</a>
+              <a  className="btn btn-outline-secondary col-1 text-center me-2" onClick={handleBhishi} >MyBHISHI</a>
+              <a  className="btn btn-outline-secondary col-1 text-center me-2" onClick={handleLoan} >MyLoan</a>
+      </div>
+</div>      
     )
 }
 

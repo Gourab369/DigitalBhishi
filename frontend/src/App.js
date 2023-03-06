@@ -1,6 +1,8 @@
 import { Routes,Route } from 'react-router-dom';
 import './App.css';
 import './Components/home/Home.css';
+import About from "./Components/home/About"
+import Contact from "./Components/home/Contact"
 import Login from "./Components/loginPages/Login"
 import ForgetPassword from './Components/loginPages/ForgetPassword';
 import ResetPassword from './Components/loginPages/ResetPassword';
@@ -8,10 +10,11 @@ import Registration from "./Components/registrationPages/Registration"
 import GeneratePassword from "./Components/registrationPages/GeneratePassword";
 import Home from "./Components/home/Home"
 
-import AdminHome from "./Components/adminDashboard/AdminHome"
-import AdminProfile from "./Components/adminDashboard/AdminProfile"
-import AdminCustomers from "./Components/adminDashboard/AdminCustomers"
-import AdminRequest from "./Components/adminDashboard/AdminRequest"
+
+import AdminHome from "./Components/admindashboard/AdminHome"
+import AdminProfile from "./Components/admindashboard/AdminProfile"
+import AdminCustomers from "./Components/admindashboard/AdminCustomers"
+import AdminRequest from "./Components/admindashboard/AdminRequest"
 
 import UserHome from "./Components/userDashboard/UserHome"
 import UserProfile from "./Components/userDashboard/UserProfile"
@@ -28,6 +31,8 @@ function App() {
     <div className="App container-fluid bgimage">
       <Routes>
         <Route index path="/" element={<Home/>}/>
+        <Route path="/about" element={<About/>}/>
+        <Route path="/contact" element={<Contact/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/registration" element={<Registration/>}/>
         <Route path="/forgetPassword" element={<ForgetPassword/>}/>

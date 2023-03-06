@@ -6,7 +6,7 @@
     background-size: cover;
     min-height:100vh;
     width:100%;
-    background-blend-mode:screen;
+    background-blend-mode:hard-light;
 }
 
 .title{
@@ -65,4 +65,7 @@ background: radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, rgba(4, 12,
 .radiolabels{
     position:relative;
     left: 70px;
+}
+.slidersizer{
+    transition: transform 0.5s ease-in-out;
 }

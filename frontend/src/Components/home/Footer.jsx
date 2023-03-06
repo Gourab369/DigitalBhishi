@@ -8,7 +8,7 @@ function Footer() {
                     <section className="d-flex justify-content-between p-4" style={{backgroundColor:"rgb(72, 129, 153)"}}>
 
                         <div className="me-5 mt-3">
-                            <h6 className="text-uppercase fw-bold">Get Connected With Us On Social Media</h6>
+                            <h4 className="text-uppercase fw-bold">Connect With Us On Social Media</h4>
                         </div>
 
                         <div className="mb-2">
@@ -37,28 +37,25 @@ function Footer() {
                                     <h6 className="fw-bold">Digital Bhishi</h6>
                                     <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{ width: "60px", backgroundColor: "#7c4dff", height: "2px" }} />
                                     <p>
-                                    “Digital Bhishi” project is an attempt to provide a platform to the
-                                    people of rural India. It aspires to be the first of its kind providing 
-                                    service for their Bhishi Digitally.
+                                    “Digital Bhishi” project is an attempt to provide a digital buisness platform to the
+                                    people of rural India engagged in Bhishi scheme. It aspires to be the first of its kind providing 
+                                    service for the Bhishi Digitally.
 
                                     </p>
                                 </div>
 
                                 <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
 
-                                    <h6 className="text-uppercase fw-bold">   Home</h6>
+                                    <h6 className="text-uppercase fw-bold">Home</h6>
                                     <hr
                                         className="mb-4 mt-0 d-inline-block mx-auto"
                                         style={{ width: "60px", backgroundColor: "#7c4dff", height: "2px" }}
                                     />
                                     <p>
-                                        <a href="/admin-login" className="text-white">Admin</a>
+                                        <a href="login" className="text-white">Admin</a>
                                     </p>
                                     <p>
-                                        <a href="/ServiceProvider-login" className="text-white">ServiceProvider</a>
-                                    </p>
-                                    <p>
-                                        <a href="/customer-login" className="text-white">Customer</a>
+                                        <a href="login" className="text-white">Customer</a>
                                     </p>
                                     
                                 </div>
@@ -73,13 +70,13 @@ function Footer() {
                                         style={{ width: "60px", backgroundColor: "#7c4dff", height: "2px" }}
                                     />
                                     <p>
-                                        <a href="/" className="text-white">Contact us</a>
+                                        <a href="/contact" className="text-white">Contact us</a>
                                     </p>
                                     <p>
-                                        <a href="/" className="text-white">About us</a>
+                                        <a href="/about" className="text-white">About us</a>
                                     </p>
                                     <p>
-                                        <a href="/" className="text-white">Help</a>
+                                        <a href="/contact" className="text-white">Help</a>
                                     </p>
                                 </div>
 
@@ -87,18 +84,15 @@ function Footer() {
 
                                 <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
 
-                                    <h6 className="text-uppercase fw-bold">Contact</h6>
+                                    <h6 className="text-uppercase fw-bold">TEAM</h6>
                                     <hr
                                         className="mb-4 mt-0 d-inline-block mx-auto"
                                         style={{ width: "60px", backgroundColor: "#7c4dff", height: "2px" }}
                                     />
-
-                                    <p><i className="fas fa-envelope mr-3"></i>Digitalbhishi@gmail.com</p>
-                                    <p><i className="fas fa-phone mr-3"></i></p>
-                                    <p><i className="fas fa-phone mr-3"></i>Rohan Ashoke Shintre</p>
-                                    <p><i className="fas fa-phone mr-3"></i>Gourab Kamakar</p>
-                                    <p><i className="fas fa-phone mr-3"></i>Aditya Darade</p>
-                                    <p><i className="fas fa-print mr-3"></i>Gourav Purohit</p>
+                                    <p><a href="http://www.linkedin.com/in/ShintreRohan" target="_blank" style={{color:"white",textDecoration:"none"}}>Rohan Ashok Shintre</a></p>
+                                    <p><a href="https://www.linkedin.com/in/gourab-karmakar-5570b2187" target="_blank" style={{color:"white",textDecoration:"none"}}>Gourab Karmakar</a></p>
+                                    <p><a href="https://www.linkedin.com/in/aditya-darade-339355260" target="_blank" style={{color:"white",textDecoration:"none"}}>Aditya Darade</a></p>
+                                    <p><a href="https://www.linkedin.com/in/gaurav-purohit-a6900612b" target="_blank" style={{color:"white",textDecoration:"none"}}>Gaurav Purohit</a></p>
                                 </div>
                             </div>
                         </div>
@@ -109,8 +103,7 @@ function Footer() {
                     >
                         <hr className="mb-4"></hr>
                         Copyright ©2023 All rights reserved by :
-                        <a className="text-white" href="https://DigitalBhishi.com/">Infoway Technology Pvt.Ltd.</a
-                        >
+                        <a className="text-white" href="https://DigitalBhishi.online/">Infoway Technology Pvt.Ltd.</a>
                     </div>
 
                 </footer>

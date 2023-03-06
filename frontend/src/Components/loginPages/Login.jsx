@@ -1,6 +1,5 @@
 import React,{useState} from "react";
 import "./ForgetPassword";
-import '../BaseStyle.css'
 import { useNavigate } from "react-router-dom";
 import BaseLayout from "../BaseLayout";
 import Footer from '../home/Footer';
@@ -26,6 +25,10 @@ const Login=()=>{
     <div className="row"> 
     <BaseLayout/>
     </div>
+
+    <div>
+    <div className="mt-5">&nbsp;</div>
+    <div className="mt-5">&nbsp;</div>
     <div className="row col-4 offset-4 mt-5 mb-5 bg-light p-4 border">
       <form className="row g-3">
       <h3 className="text-center">Please Sign in</h3>
@@ -66,7 +69,8 @@ const Login=()=>{
     <button type="submit" className="btn btn-danger flex-row" onClick={handleNav}>Login</button>
     </div>  
       </form>
-      </div>
+    </div>
+    </div>
 
       <div className="row">
       <Footer/>

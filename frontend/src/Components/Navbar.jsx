@@ -21,20 +21,23 @@ const handleLogout=()=>{
   navigator("/adminLogout")
 }
 
-    return (
-      <div>
-        <nav className="navbar fixed-top navbar-dark bg-dark">
-      <div className="container-fluid justify-content-start">
-      <button type="button" className="btn btn-primary btn-lg me-5" onClick={handleLogout}>Logout</button>
-      <button className="btn btn-outline-success me-5" type="button" onClick={handleHome}>Home</button>
-      <button className="btn btn-outline-success me-5" type="button" onClick={handleProfile}>Profile</button>
-      <button className="btn btn-outline-success me-5" type="button" onClick={handleCustomers}>Customers</button>
-      <button className="btn btn-outline-warning me-" type="button" onClick={handleRequest}> Request</button>     
-      </div>
-        </nav>
-    <>
-    {children}</>
-  </div>
+    return (<>
+     <div className="header ">
+                <div className="title row" >
+                    <div className="titlebar col mb-2">
+                    <img className="titlelogo" src="logo.jpg" />Admin Portal</div>
+                </div>
+                <hr/>
+                
+                <div className="row grid-container">
+                        <a  className="btn btn-primary col-1 text-start text-center me-2" onClick={handleLogout} >LOGOUT </a>
+                        <a  className="btn btn-outline-secondary col-1 text-center me-2" onClick={handleHome}>HOME</a>
+                        <a  className="btn btn-outline-secondary col-1 text-center me-2" onClick={handleProfile} >PROFILE</a>
+                        <a  className="btn btn-outline-secondary col-1 text-center me-2" onClick={handleCustomers} >CUSTOMERS</a>
+                        <a  className="btn btn-outline-secondary col-1 text-center me-2" onClick={handleRequest} >REQUEST</a>
+                </div>
+        </div>
+  </>
         
     )
 }

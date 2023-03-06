@@ -4,21 +4,15 @@ import backgroundImage from "./backdashboard.jpg"
 const AdminRequest=()=> {
     return (<>
 
-<div
-      style={{
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        minHeight: "100vh",
-        width: "100vw" // set a minimum height to make sure the image covers the entire screen
-      }}>
- 
-      {<div>
+
       <div className='mt-3'>
           <Navbar/>
-          <h1 style={{color:"red"}}>Welcome</h1> 
-          <h1 style={{color:"red"}}>Admin Request</h1> 
-      </div>
+       </div>
+
+       <div className="mt-5">&nbsp;</div>
+        <div className="mt-5">&nbsp;</div>
+        <div className="mt-5">&nbsp;</div>
+        
       <div className='offset-2'>
             <table className="table-primary border-5">
                 <tr className="table-primary">
@@ -94,11 +88,7 @@ const AdminRequest=()=> {
                   </tr>
             </table>
        </div>
-      </div>
-        
       
-  }
-    </div>
         
         </>
     )

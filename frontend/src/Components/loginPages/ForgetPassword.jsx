@@ -1,6 +1,5 @@
 import React from "react";
 import "./ResetPassword";
-import '../BaseStyle.css'
 import BaseLayout from "../BaseLayout";
 import Footer from "../home/Footer";
 import { useNavigate } from "react-router-dom";
@@ -15,11 +14,13 @@ const ForgetPassword=()=>{
     <div className="row">
         <BaseLayout/>
       </div>
-    <div className="col-5 mt-5 mb-5 offset-3 bg-light row p-4 border">
+      <div className="mt-5">&nbsp;</div>
+         <div className="mt-5">&nbsp;</div>
+         <div className="col-5 mt-5 mb-5 offset-3 bg-light row p-4 border">
         <h3 className="text-center mb-4">Forget Password</h3>
           <div className="mb-3 row">
         <div className="col-10 offset-2">
-          <input type="text" className="form-control flex-row" id="username" placeholder="Aadhar Number"/>
+          <input type="text" className="form-control flex-row" id="username" placeholder="Mobile Number"/>
           </div>
         </div>
 
