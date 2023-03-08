@@ -5,27 +5,29 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class NewCustomers {
+public class NewCustomer {
     @Id
     @GeneratedValue
-    private Integer customerId;
+    private Integer newCustomerId;
     private String firstName;
     private String middleName;
     private String lastName;
     private String mobileNumber;
     private String alternateNumber;
-    @Column(unique=true)
+
     private String aadharNumber;
     private String aadharPic;
     private String guarantor1Aadhar;
     private String guarantor2Aadhar;
 
+    private String password;
+
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) // attributes are necessary
-    @JoinColumn(name="AddressId")
-    private Addresses customerAddress;
+    @JoinColumn(name="addressId")
+    private Address newCustomerAddress;
 
-    public NewCustomers(String firstName, String middleName, String lastName, String mobileNumber, String alternateNumber, String aadharNumber, String aadharPic, String guarantor1Aadhar, String guarantor2Aadhar, Addresses customerAddress) {
+    public NewCustomer(String firstName, String middleName, String lastName, String mobileNumber, String alternateNumber, String aadharNumber, String aadharPic, String guarantor1Aadhar, String guarantor2Aadhar, String password, Address newCustomerAddress) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -35,18 +37,19 @@ public class NewCustomers {
         this.aadharPic = aadharPic;
         this.guarantor1Aadhar = guarantor1Aadhar;
         this.guarantor2Aadhar = guarantor2Aadhar;
-        this.customerAddress = customerAddress;
+        this.password = password;
+        this.newCustomerAddress = newCustomerAddress;
     }
 
-    public NewCustomers() {
+    public NewCustomer() {
     }
 
     public Integer getCustomerId() {
-        return customerId;
+        return newCustomerId;
     }
 
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
+    public void setCustomerId(Integer newCustomerId) {
+        this.newCustomerId = newCustomerId;
     }
 
     public String getFirstName() {
@@ -121,24 +124,38 @@ public class NewCustomers {
         this.guarantor2Aadhar = guarantor2Aadhar;
     }
 
-    public Addresses getCustomerAddress() {
-        return customerAddress;
+    public Address getCustomerAddress() {
+        return newCustomerAddress;
     }
 
-    public void setCustomerAddress(Addresses customerAddress) {
-        this.customerAddress = customerAddress;
+    public Address getNewCustomerAddress() {
+        return newCustomerAddress;
     }
+
+    public void setNewCustomerAddress(Address newCustomerAddress) {
+        this.newCustomerAddress = newCustomerAddress;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        NewCustomers that = (NewCustomers) o;
-        return Objects.equals(customerId, that.customerId) && Objects.equals(firstName, that.firstName) && Objects.equals(middleName, that.middleName) && Objects.equals(lastName, that.lastName) && Objects.equals(mobileNumber, that.mobileNumber) && Objects.equals(alternateNumber, that.alternateNumber) && Objects.equals(aadharNumber, that.aadharNumber) && Objects.equals(aadharPic, that.aadharPic) && Objects.equals(guarantor1Aadhar, that.guarantor1Aadhar) && Objects.equals(guarantor2Aadhar, that.guarantor2Aadhar) && Objects.equals(customerAddress, that.customerAddress);
+        NewCustomer that = (NewCustomer) o;
+        return Objects.equals(newCustomerId, that.newCustomerId) && Objects.equals(firstName, that.firstName) && Objects.equals(middleName, that.middleName) && Objects.equals(lastName, that.lastName) && Objects.equals(mobileNumber, that.mobileNumber) && Objects.equals(alternateNumber, that.alternateNumber) && Objects.equals(aadharNumber, that.aadharNumber) && Objects.equals(aadharPic, that.aadharPic) && Objects.equals(guarantor1Aadhar, that.guarantor1Aadhar) && Objects.equals(guarantor2Aadhar, that.guarantor2Aadhar) && Objects.equals(newCustomerAddress, that.newCustomerAddress);
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customerId, firstName, middleName, lastName, mobileNumber, alternateNumber, aadharNumber, aadharPic, guarantor1Aadhar, guarantor2Aadhar, customerAddress);
+        return Objects.hash(newCustomerId, firstName, middleName, lastName, mobileNumber, alternateNumber, aadharNumber, aadharPic, guarantor1Aadhar, guarantor2Aadhar, newCustomerAddress);
     }
 }

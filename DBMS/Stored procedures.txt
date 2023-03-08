@@ -5,7 +5,7 @@ mobilenumber varchar(10),alternateNumber varchar(10),aadharNumber varchar(12),
 aadharPic varchar(200),panNumber varchar(13),panPic varchar(200),addressId int)
 BEGIN
 	declare EXIT handler for 1062 select "User Already Exists!!" as 'Error';
-	insert into adminDetails values(default,firstName,middleName,lastName,mobilenumber,
+	insert into admin values(default,firstName,middleName,lastName,mobilenumber,
 	alternateNumber,aadharNumber,aadharPic,panNumber,panPic,addressId);
 
 END $$

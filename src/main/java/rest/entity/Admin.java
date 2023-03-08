@@ -6,7 +6,7 @@ import java.util.Set;
 
 
 @Entity
-public class AdminDetails {
+public class Admin {
     @Id
     @GeneratedValue
     private Integer adminId;
@@ -21,14 +21,16 @@ public class AdminDetails {
     private String panNumber;
     private String panPic;
 
+    private  String password;
+
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) // attributes are necessary
     @JoinColumn(name="AddressId")
-    private Addresses address;
+    private Address address;
 
-    @OneToMany(mappedBy = "adminDetails")
-    private Set<CustomerDetails> customerDetails;
+    @OneToMany(mappedBy = "admin")
+    private Set<Customer> customerDetails;
 
-    public AdminDetails(String firstName, String middleName, String lastName, String mobileNumber, String alternateNumber, String aadharNumber, String aadharPic, String panNumber, String panPic, Addresses address) {
+    public Admin(String firstName, String middleName, String lastName, String mobileNumber, String alternateNumber, String aadharNumber, String aadharPic, String panNumber, String panPic, Address address) {
 
         this.firstName = firstName;
         this.middleName = middleName;
@@ -42,7 +44,7 @@ public class AdminDetails {
         this.address = address;
     }
 
-    public AdminDetails() {
+    public Admin() {
     }
 
     public int getAdminId() {
@@ -85,7 +87,7 @@ public class AdminDetails {
         return panPic;
     }
 
-    public Addresses getAddress() {
+    public Address getAddress() {
         return address;
     }
 
@@ -129,6 +131,14 @@ public class AdminDetails {
         this.panPic = panPic;
     }
 
-    public void setAddressId(Addresses addressId) {this.address = address;
+    public void setAddressId(Address addressId) {this.address = address;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

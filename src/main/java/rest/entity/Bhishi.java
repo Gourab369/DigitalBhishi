@@ -4,10 +4,9 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Entity
-public class BhishiDetails {
+public class Bhishi {
 
     @Id
     @GeneratedValue
@@ -17,20 +16,20 @@ public class BhishiDetails {
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) // attributes are necessary
     @JoinColumn(name="LoanId")
-    private LoanDetails loanDetails;
+    private Loan loan;
 
-    @OneToOne(mappedBy = "bhishiDetails")
-    private CustomerDetails customerDetails;
+    @OneToOne(mappedBy = "bhishi")
+    private Customer customer;
     private boolean isActive;
     private boolean loanStatus;
     private int inactiveDays;
     private String terminationStatus;
     private double premiumAmount;
 
-    public BhishiDetails(LocalDateTime startDate, LocalDate maturityDate, LoanDetails loanDetails, boolean isActive, boolean loanStatus, int inactiveDays, String terminationStatus, double premiumAmount) {
+    public Bhishi(LocalDateTime startDate, LocalDate maturityDate, Loan loan, boolean isActive, boolean loanStatus, int inactiveDays, String terminationStatus, double premiumAmount) {
         this.startDate = startDate;
         this.maturityDate = maturityDate;
-        this.loanDetails = loanDetails;
+        this.loan = loan;
         this.isActive = isActive;
         this.loanStatus = loanStatus;
         this.inactiveDays = inactiveDays;
@@ -38,7 +37,7 @@ public class BhishiDetails {
         this.premiumAmount = premiumAmount;
     }
 
-    public BhishiDetails() {
+    public Bhishi() {
     }
 
     public void setBhishiID(int bhishiId) {
@@ -106,13 +105,13 @@ public class BhishiDetails {
         return premiumAmount;
     }
 
-    public LoanDetails getLoanDetails() {
-        return loanDetails;
+    public Loan getLoanDetails() {
+        return loan;
     }
 
     
-    public void setLoanDetails(LoanDetails loanDetails) {
-        this.loanDetails = loanDetails;
+    public void setLoanDetails(Loan loan) {
+        this.loan = loan;
     }
 
 }

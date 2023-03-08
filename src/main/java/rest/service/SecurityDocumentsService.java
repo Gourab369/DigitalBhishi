@@ -9,28 +9,28 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class SecurityDetailsService {
+public class SecurityDocumentsService {
     @Autowired
-    private SecurityDocumentsRepository securityDocumentsRepo;
+    private SecurityDocumentsRepository securityDocumentsRepository;
 
     public List<SecurityDocuments> getAllSecurityDocuments(){
-        List<SecurityDocuments> allSecurityDocuments = securityDocumentsRepo.findAll();
+        List<SecurityDocuments> allSecurityDocuments = securityDocumentsRepository.findAll();
         return allSecurityDocuments;
     }
 
     public SecurityDocuments getOneSecurityDocuments(Integer securityDocumentsId) {
-        Optional<SecurityDocuments> securityDocumentsOpt = securityDocumentsRepo.findById(securityDocumentsId);
+        Optional<SecurityDocuments> securityDocumentsOpt = securityDocumentsRepository.findById(securityDocumentsId);
         SecurityDocuments foundSecurityDocuments = securityDocumentsOpt.get();
         return foundSecurityDocuments;
     }
 
     public SecurityDocuments createSecurityDocuments(SecurityDocuments SecurityDocuments) {
-        SecurityDocuments createdSecurityDocuments = securityDocumentsRepo.save(SecurityDocuments);
+        SecurityDocuments createdSecurityDocuments = securityDocumentsRepository.save(SecurityDocuments);
         return createdSecurityDocuments;
     }
 
     public void deleteOneSecurityDocuments(Integer SecurityDocumentsId) {
-        securityDocumentsRepo.deleteById(SecurityDocumentsId);
+        securityDocumentsRepository.deleteById(SecurityDocumentsId);
     }
 
 }

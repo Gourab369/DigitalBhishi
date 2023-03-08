@@ -18,7 +18,7 @@ public class SecurityDocuments {
     private String document4;
 
     @OneToOne(mappedBy = "securityDocuments")
-    private CustomerDetails customerDetails;
+    private Customer customer;
     public SecurityDocuments(String document1, String document2, String document3, String document4) {
         this.document1 = document1;
         this.document2 = document2;

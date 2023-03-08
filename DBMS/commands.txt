@@ -1,32 +1,32 @@
-1) adminDetails
-create table adminDetails(adminId int primary key auto_increment,firstName varchar(40) not null,middleName varchar(40),lastName varchar(40)not null,mobilenumber varchar(10) not null,
+1) admin
+create table admin(adminId int primary key auto_increment,firstName varchar(40) not null,middleName varchar(40),lastName varchar(40)not null,mobilenumber varchar(10) not null,
 alternateNumber varchar(10),aadharNumber varchar(12) unique key not null,aadharPic varchar(200) not null,panNumber varchar(13),panPic varchar(200),addressId int not null,foreign key(addressId) references addresses(addressId));
 
-2)customerDetails
-create table customerDetails(customerId int primary key auto_increment,firstName varchar(40) not null,middleName varchar(40),
+2)customer
+create table customer(customerId int primary key auto_increment,firstName varchar(40) not null,middleName varchar(40),
 lastName varchar(40) not null,mobilenumber varchar(10)not null,alternateNumber varchar(10),aadharNumber varchar(12)unique key not null,
 aadharPic varchar(200)not null,guarantor1Aadhar varchar(12)not null,guarantor2Aadhar varchar(12)not null,addressId int not null,
-adminId int not null,bhishiId int not null,documentId int not null,foreign key(addressId)references addresses(addressId),foreign key(adminId) references adminDetails(adminId),
-foreign key(bhishiId) references bhishiDetails(bhishiId),foreign key(documentId) references securityDocuments(documentId));
+adminId int not null,bhishiId int not null,documentId int not null,foreign key(addressId)references addresses(addressId),foreign key(adminId) references admin(adminId),
+foreign key(bhishiId) references bhishi(bhishiId),foreign key(documentId) references securityDocuments(documentId));
 
 3)addresses
 create table addresses(addressId int primary key auto_increment,street varchar(40),locality varchar(40),cityOrVillage varchar(40) not null,tahasil varchar(40) not null,district varchar(40) not null,state varchar(40) not null,
 zipCode varchar(6)not null);
 
-4)bhishiDetails
-create table bhishiDetails(bhishiId int primary key auto_increment,startDate datetime not null default now(),maturityDate date not null,loanId int,isActive bool not null,loanStatus bool not null,inactiveDays int,terminationStatus varchar(40),
-premiumAmount double,foreign key(loanId) references loanDetails(loanId));
+4)bhishi
+create table bhishi(bhishiId int primary key auto_increment,startDate datetime not null default now(),maturityDate date not null,loanId int,isActive bool not null,loanStatus bool not null,inactiveDays int,terminationStatus varchar(40),
+premiumAmount double,foreign key(loanId) references loan(loanId));
 
-5)loanDetails
-create table loanDetails(loanId int primary key auto_increment,startDate datetime not null default now(),endDate date not null,
+5)loan
+create table loan(loanId int primary key auto_increment,startDate datetime not null default now(),endDate date not null,
 principalAmount double not null,intrestPercent float not null,repaidAmount double not null default 0);
 
 6)securityDocuments
 create table securityDocuments(documentId int primary key auto_increment,document1 varchar(200) not null,document2 varchar(200),
 document3 varchar(200),document4 varchar(200));
 
-7)loginDetails
-create table loginDetails(loginId int primary key auto_increment,userName varchar(40)not null,passwordd char(64) not null invisible);
+7)login
+create table login(loginId int primary key auto_increment,userName varchar(40)not null,passwordd char(64) not null invisible);
 
 8)seesionLogs
 create table sessionLogs(logId int primary key,sessionStart datetime default now(),sessionEnd datetime default now(),loginId int not null,tokenId varchar(200) not null);
