@@ -12,26 +12,26 @@ import java.util.Optional;
 public class SessionLogsService {
 
     @Autowired
-    private SessionLogsRepository sessionLogsRepo;
+    private SessionLogsRepository sessionLogsRepository;
 
     public List<SessionLogs> getAllSessionLogs(){
-        List<SessionLogs> allSessionLogs = sessionLogsRepo.findAll();
+        List<SessionLogs> allSessionLogs = sessionLogsRepository.findAll();
         return allSessionLogs;
     }
 
     public SessionLogs getOneSessionLogs(Integer sessionLogsId) {
-        Optional<SessionLogs> sessionLogsOpt = sessionLogsRepo.findById(sessionLogsId);
+        Optional<SessionLogs> sessionLogsOpt = sessionLogsRepository.findById(sessionLogsId);
         SessionLogs foundSessionLogs = sessionLogsOpt.get();
         return foundSessionLogs;
     }
 
     public SessionLogs createSessionLogs(SessionLogs SessionLogs) {
-        SessionLogs createdSessionLogs = sessionLogsRepo.save(SessionLogs);
+        SessionLogs createdSessionLogs = sessionLogsRepository.save(SessionLogs);
         return createdSessionLogs;
     }
 
     public void deleteOneSessionLogs(Integer SessionLogsId) {
-        sessionLogsRepo.deleteById(SessionLogsId);
+        sessionLogsRepository.deleteById(SessionLogsId);
     }
 
 

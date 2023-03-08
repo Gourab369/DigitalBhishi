@@ -1,10 +1,14 @@
 import React from 'react'
 import UserNavbar from '../UserNavbar'
+import {useState, useEffect} from 'react';
+import http from '../../httpCommon';
+import useAuth from '../../hooks/useAuth';
 
 const UserProfile=()=> {
+  
     return (<>
         <div className="row">
-           <UserNavbar/>
+          <UserNavbar/>
         </div>
 
         <div>
@@ -123,7 +127,6 @@ const UserProfile=()=> {
                       </div>
                     </div>
 
-                   
         </form>
       </div>
       </div>
