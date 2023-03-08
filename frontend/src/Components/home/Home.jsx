@@ -4,8 +4,8 @@ import Footer from './Footer'
 import BaseLayout from '../BaseLayout'
 
 const Home=()=>{
- 
-    return <> <div className="row">
+    return (  <>
+                <div className="row">
                   <BaseLayout/>
                 </div>
                 <hr/>
@@ -15,8 +15,8 @@ const Home=()=>{
                 <div className="row">
                   <Footer/>
                 </div>
-          </>
-
+              </>
+    )
 }
 
 export default Home;

@@ -74,7 +74,7 @@ const Registration=()=>{
     .catch(err=>console.log(err))
 
     if(!postPermission){
-      triggerUserExistError()
+      //alert("Number already registered\n Please use a different number")
       setToDisable(false)// entry fields editable
     }else triggerCorrect()
   },[checkCustomerNumberExists])
