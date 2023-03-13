@@ -7,7 +7,7 @@ import http from '../../httpCommon'
 const AdminHome=()=> {
   //const sendDataURL = "/"
   const navigator=useNavigate();
- // const [date,setDate] = useState("00-00-0000");
+  const [date,setDate] = useState("00-00-0000");
  // const [convertedDate, setConvertedDate]=useState(()=>date.substring(6,10)+"-"+date.substring(3,5)+"-"+date.substring(0,2));
   const [bhishiDataToSend , setBhishiDataToSend]=useState({
     startDate:"",
