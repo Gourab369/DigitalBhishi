@@ -5,10 +5,10 @@ import { HiPlus } from 'react-icons/hi';
 import http from '../../httpCommon'
 
 const AdminHome=()=> {
-  const sendDataURL = "/"
+  //const sendDataURL = "/"
   const navigator=useNavigate();
-  const [date,setDate] = useState("00-00-0000");
-  const [convertedDate, setConvertedDate]=useState(()=>date.substring(6,10)+"-"+date.substring(3,5)+"-"+date.substring(0,2));
+ // const [date,setDate] = useState("00-00-0000");
+ // const [convertedDate, setConvertedDate]=useState(()=>date.substring(6,10)+"-"+date.substring(3,5)+"-"+date.substring(0,2));
   const [bhishiDataToSend , setBhishiDataToSend]=useState({
     startDate:"",
     endDate:"",
@@ -17,11 +17,11 @@ const AdminHome=()=> {
     paidUp:0,
     terminationStatus:0
   })
-  const [tableProperty, setTableProperty]=useState("none");
+ // const [tableProperty, setTableProperty]=useState("none");
 
-  const handleCreateBhishiTable=()=>{
-    setTableProperty("inline")
-  }
+ // const handleCreateBhishiTable=()=>{
+   // setTableProperty("inline")
+  //}
 
   const handleAddNewAdmin=()=>{
     navigator("/adminRegistration")
