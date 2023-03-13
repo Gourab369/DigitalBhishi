@@ -141,7 +141,7 @@ const [confirmPassword, setConfirmPassword]=useState("");
 
 
 
-    }else if(dataToRegister.password!=confirmPassword) {window.alert("Reenter Password")
+    }else if(dataToRegister.password!==confirmPassword) {window.alert("Reenter Password")
   }
     else {
       window.alert("All fields are not valid yet!!!")
