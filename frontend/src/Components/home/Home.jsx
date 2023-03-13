@@ -1,9 +1,10 @@
-import React from "react";
+import React,{useEffect} from "react";
 import Slider from './Slider'
 import Footer from './Footer'
 import BaseLayout from '../BaseLayout'
 
 const Home=()=>{
+  
     return (  <>
                 <div className="row">
                   <BaseLayout/>

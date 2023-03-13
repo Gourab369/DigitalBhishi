@@ -33,4 +33,8 @@ public class BhishiService {
         bhishiRepository.deleteById(BhishiId);
     }
 
+    public void updatePadeUpValues(Integer bhishiId, double paidUpValues) {
+        bhishiRepository.updatePaidUpValues(bhishiId, paidUpValues);
+    }
+
 }

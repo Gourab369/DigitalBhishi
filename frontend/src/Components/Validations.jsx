@@ -30,6 +30,13 @@ function ValidateAadharNumberFields(text){
     }
     return 2;
 }
+function ValidatePanNumberFields(text){
+    let testText=/^[0-9]{13,13}$/
+    if(text.match(testText)){
+        return 1;
+    }
+    return 2;
+}
 
 function ValidateZipCodeFields(text){
     let testText=/^[0-9]{6,6}$/
@@ -47,4 +54,11 @@ function ValidatePicFormats(file){
     return 2;
 }
 
-export { ValidationResult, ValidateTextFields, ValidatePhoneNumberFields, ValidatePicFormats, ValidateZipCodeFields, ValidateAadharNumberFields};
+function ValidatePasswordFields(text){
+    let testText=/[a-zA-Z0-9]{8,}/
+    if(testText.test(text)){
+        return 1;
+    }return 2;
+}
+
+export { ValidatePasswordFields,ValidatePanNumberFields,ValidationResult, ValidateTextFields, ValidatePhoneNumberFields, ValidatePicFormats, ValidateZipCodeFields, ValidateAadharNumberFields};

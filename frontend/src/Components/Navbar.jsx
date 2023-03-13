@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import http from '../httpCommon';
 
 const Navbar=({children})=> {
 const navigator=useNavigate();
@@ -18,11 +19,15 @@ const handleCustomers=()=>{
   navigator("/adminCustomers")
 }
 const handleLogout=()=>{
-  navigator("/adminLogout")
+  http.get("/logout")
+  .then(response=>{
+    console.log("session endded")
+  }).catch(err=>console.log(err))
+  navigator('/login',{replace:true});
 }
 
     return (<>
-     <div className="header ">
+      <div className="header ">
                 <div className="title row" >
                     <div className="titlebar col mb-2">
                     <img className="titlelogo" src="logo.jpg" />Admin Portal</div>
