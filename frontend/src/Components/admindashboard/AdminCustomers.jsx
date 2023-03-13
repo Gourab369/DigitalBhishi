@@ -1,90 +1,60 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Navbar from '../Navbar';
 import backgroundImage from "./backdashboard.jpg"
+import http from '../../httpCommon'
+
 const AdminCustomers = () => {
+  const requestURL="/AdminDashboard-getAllCustomers"
+  const [customers, setCustomers]=useState([])
+  const handleGetCustomers=()=>{
+    http.get(requestURL)
+    .then(response=>{
+      console.log(response.data)
+      setCustomers(response.data)
+    })
+    .catch(err=>{console.log(err)})
+  }
     return (<>
-   
- 
-     
+
       <div className='mt-3'>
           <Navbar/>
-       </div>
+      </div>
 
       
-         <div className="mt-5">&nbsp;</div>
-        <div className="mt-5">&nbsp;</div>
-        <div className="mt-5">&nbsp;</div>
-      <div className='offset-2'>
-       <table className="table-primary border-5">
-                <tr className="table-primary">
-                  <th className="table-primary">Full Name</th>
-                  <th className="table-secondary">Mobile Number</th>
-                  <th className="table-success">Alternate Number</th>
-                  <th className="table-danger">Aadhar Number</th>
-                  <th className="table-light">Address</th>
-                  <th className="table-light">Option</th>
-                  </tr>
-
+      <div className="row mt-5">&nbsp;</div>
+        <div className="row mt-5">&nbsp;</div>
+        <div className="row mt-5">&nbsp;</div>
+        
+        <div className="row p-3 grid-container">
+        <button type="button" className='btn btn-warning col-2' onClick={handleGetCustomers}>Show Registered Customers</button>
+        </div>
+      <div className='ms-1 mt-2 row'>
+            <table className="table-primary border-5">
+                <thead>
                   <tr className="table-primary">
-                  <td className="table-primary">Full Name</td>
-                  <td className="table-secondary">Mobile Number</td>
-                  <td className="table-success">Alternate Number</td>
-                  <td className="table-danger">Aadhar Number</td>
-                  <td className="table-light">Address</td>
-                  <td className="table-dark"> <button type="button" class="btn btn-primary btn-sm">Edit</button></td>
-                  </tr>
-
-                  <tr className="table-primary">
-                  <td className="table-primary">Full Name</td>
-                  <td className="table-secondary">Mobile Number</td>
-                  <td className="table-success">Alternate Number</td>
-                  <td className="table-danger">Aadhar Number</td>
-                  <td className="table-light">Address</td>
-                  <td className="table-dark"> <button type="button" class="btn btn-primary btn-sm">Edit</button></td>
-                  </tr>
-                 
-                  <tr className="table-primary">
-                  <td className="table-primary">Full Name</td>
-                  <td className="table-secondary">Mobile Number</td>
-                  <td className="table-success">Alternate Number</td>
-                  <td className="table-danger">Aadhar Number</td>
-                  <td className="table-light">Address</td>
-                  <td className="table-dark"> <button type="button" class="btn btn-primary btn-sm">Edit</button></td>
-                  </tr>
+                    <td className="table-primary">Full Name </td>
+                    <td className="table-primary">Middle Name </td>
+                    <td className="table-primary">last Name </td>
+                    <td className="table-secondary">Mobile Number </td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                {customers.map((customer,index)=>{
+                  return (<tr key={index}>
+                            <td className="me-3">{customer.firstName}</td>
+                            <td>{customer.middleName}</td>
+                            <td>{customer.lastName}</td>
+                            <td className="me-3">{customer.mobileNumber}</td>
+                  </tr>);
+                })}
+                </tbody>
 
                   
-                  <tr className="table-primary">
-                  <td className="table-primary">Full Name</td>
-                  <td className="table-secondary">Mobile Number</td>
-                  <td className="table-success">Alternate Number</td>
-                  <td className="table-danger">Aadhar Number</td>
-                  <td className="table-light">Address</td>
-                  <td className="table-dark"> <button type="button" class="btn btn-primary btn-sm">Edit</button></td>
-                  </tr>
-
-                  
-                  <tr className="table-primary">
-                  <td className="table-primary">Full Name</td>
-                  <td className="table-secondary">Mobile Number</td>
-                  <td className="table-success">Alternate Number</td>
-                  <td className="table-danger">Aadhar Number</td>
-                  <td className="table-light">Address</td>
-                  <td className="table-dark"> <button type="button" class="btn btn-primary btn-sm">Edit</button></td>
-                  </tr>
-                  
-                  <tr className="table-primary">
-                  <td className="table-primary">Full Name</td>
-                  <td className="table-secondary">Mobile Number</td>
-                  <td className="table-success">Alternate Number</td>
-                  <td className="table-danger">Aadhar Number</td>
-                  <td className="table-light">Address</td>
-                  <td className="table-dark"> <button type="button" class="btn btn-primary btn-sm">Edit</button></td>
-                  </tr>
-       </table>
-       </div>
+            </table>
+      </div>
 
       
-   
+
     </>
     )
 }

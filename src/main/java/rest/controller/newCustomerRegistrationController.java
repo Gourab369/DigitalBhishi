@@ -1,11 +1,15 @@
 package rest.controller;
 
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 import rest.entity.NewCustomer;
 import rest.otp.Otp;
 import rest.otp.SendOtpPost;
+import rest.pojo.Format;
 import rest.service.NewCustomerService;
 
 import java.util.List;
@@ -36,19 +40,45 @@ public class newCustomerRegistrationController {
             return false;
         }
     }
+    @GetMapping("/newCustomerRegistration-generateOtpPost")
+    public boolean generateOtpPost(HttpSession session, @RequestBody String mobileNumber) {
+        mobileNumber = Format.formatNumber(mobileNumber);
+        List<NewCustomer> newCustomers = newCustomerService.getAllNewCustomer();
+        for (NewCustomer iterator: newCustomers) {
+            if(iterator.getMobileNumber().equals(mobileNumber)) {
+                System.out.println("mobile number is already Present");
+                return  false;
+            }
+        }
+        Otp otp = new Otp();
+        String otpMessage = otp.generateOtp(4);
+        System.out.println("Generated otp: " + otpMessage);
+        String apiKey = "Rr36ehDsQwlLx4G925FvcXnNbmWZSPHa1pfT8OygYEIzVCMU0k98YW1XVdDhUmctBTvspouFOgr6QkCN";
+        try {
+            SendOtpPost.sendOtp(otpMessage, mobileNumber, apiKey);
+            session.setAttribute("customerOtp", otpMessage);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
 
     @PostMapping("/newCustomerRegistration-verifyOtp")
-    public boolean verifyOtp(HttpSession session, @RequestBody String otp) {
-        String generatedOtp =  (String) session.getAttribute("customerOtp");
+    public boolean verifyOtp(HttpSession seession, @RequestBody String otp) {
+        otp = Format.formatOtp(otp);
+        System.out.println("FormatedOtp" + otp);
+        System.out.println(otp);
+        String generatedOtp =  (String) seession.getAttribute("customerOtp");
+        System.out.println("GeneratedOtp" + generatedOtp);
         if(otp.equals(generatedOtp)){
             System.out.println("Verified");
-            session.setAttribute("customerOtpVerified",true);
+            seession.setAttribute("customerOtpVerified",true);
             return true;
         }
         else{
             System.out.println("Noooooo");
-            session.setAttribute("customerOtpVerified",false);
+            seession.setAttribute("customerOtpVerified",false);
             return false;
         }
 

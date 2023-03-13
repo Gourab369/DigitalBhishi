@@ -1,10 +1,13 @@
 package rest.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.util.Objects;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "newCustomerId")
 public class NewCustomer {
     @Id
     @GeneratedValue
@@ -44,11 +47,11 @@ public class NewCustomer {
     public NewCustomer() {
     }
 
-    public Integer getCustomerId() {
+    public Integer getNewCustomerId() {
         return newCustomerId;
     }
 
-    public void setCustomerId(Integer newCustomerId) {
+    public void setNewCustomerId(Integer newCustomerId) {
         this.newCustomerId = newCustomerId;
     }
 

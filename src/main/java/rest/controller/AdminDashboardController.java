@@ -54,8 +54,8 @@ public class AdminDashboardController {
         return  newCustomers;
     }
 
-    @PostMapping("/AdminDashboard-approveCustomer")
-    public boolean approveCustomer(HttpSession session, @RequestBody Integer newCustomerId) {
+    @PostMapping("/AdminDashboard-approveCustomer/{newCustomerId}")
+    public boolean approveCustomer(HttpSession session, @PathVariable("newCustomerId") Integer newCustomerId, @RequestBody Bhishi bhishi) {
         boolean adminLogin = (boolean) session.getAttribute("adminLogin");
         if(! adminLogin)
             return false;
@@ -76,11 +76,12 @@ public class AdminDashboardController {
         String password = newCustomer.getPassword();
         Address address = newCustomer.getNewCustomerAddress();
         Customer customer = new Customer(firstName, middleName, lastName, mobileNumber, alternatNumber, aadharNumber ,aadharPic, gurantor1Aadhar, gurantor2Aahar, password,
-                address, admin, new Bhishi(), new SecurityDocuments());
+                address, admin, bhishi, new SecurityDocuments());
         customerService.createCustomer(customer);
         newCustomerService.deleteOneNewCustomer(newCustomerId);
         return  true;
     }
+
 
     @GetMapping("AdminDashboard-getCustomer")
     public Customer getCustomer(HttpSession session, String mobileNo){
@@ -102,6 +103,8 @@ public class AdminDashboardController {
         return true;
 
     }
+
+
 
 
 

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import rest.entity.Admin;
 import rest.otp.Otp;
 import rest.otp.SendOtpPost;
+import rest.pojo.Format;
 import rest.service.AdminService;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class AdminRegistrationController {
             SendOtpPost.sendOtp(otpMessage, mobileNumber, apiKey);
             session.setAttribute("adminOtp", otpMessage);
             return true;
-        } catch (Exception e) {
+        } catch (Exception e){
             return false;
         }
     }
@@ -40,6 +41,8 @@ public class AdminRegistrationController {
 
     @PostMapping("/adminRegistration-verifyOtp")
     public boolean verifyOtp(HttpSession session, @RequestBody String otp) {
+        otp = Format.formatOtp(otp);
+
         String generatedOtp =  (String) session.getAttribute("adminOtp");
         if(otp.equals(generatedOtp)){
             System.out.println("Verified");

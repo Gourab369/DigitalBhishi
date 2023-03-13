@@ -1,11 +1,15 @@
 package rest.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "bhishiId")
 public class Bhishi {
 
     @Id
@@ -26,6 +30,10 @@ public class Bhishi {
     private String terminationStatus;
     private double premiumAmount;
 
+    private double paidUpValues;
+
+    @OneToMany(mappedBy = "bhishi")
+    private Set<Payment> payments;
     public Bhishi(LocalDateTime startDate, LocalDate maturityDate, Loan loan, boolean isActive, boolean loanStatus, int inactiveDays, String terminationStatus, double premiumAmount) {
         this.startDate = startDate;
         this.maturityDate = maturityDate;
@@ -39,6 +47,47 @@ public class Bhishi {
 
     public Bhishi() {
     }
+
+    public Set<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(Set<Payment> payments) {
+        this.payments = payments;
+    }
+
+    public int getBhishiId() {
+        return bhishiId;
+    }
+
+    public void setBhishiId(int bhishiId) {
+        this.bhishiId = bhishiId;
+    }
+
+    public Loan getLoan() {
+        return loan;
+    }
+
+    public void setLoan(Loan loan) {
+        this.loan = loan;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public double getPaidUpValues() {
+        return paidUpValues;
+    }
+
+    public void setPaidUpValues(double paidUpValues) {
+        this.paidUpValues = paidUpValues;
+    }
+
 
     public void setBhishiID(int bhishiId) {
         this.bhishiId = bhishiId;

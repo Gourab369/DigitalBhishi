@@ -1,8 +1,7 @@
-import React,{useRef, useEffect, useState} from "react";
-import useAuth from '../../hooks/useAuth'
+import React,{useState} from "react";
 
 import "./ForgetPassword";
-import { Link, useLocation ,useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import BaseLayout from "../BaseLayout";
 import Footer from '../home/Footer';
 import http from '../../httpCommon'
@@ -11,35 +10,27 @@ import '../adminDashboard/AdminHome.jsx'
 import '../userDashboard/UserHome'
 
 const Login=()=>{
-  const {setAuth}= useAuth();
-  const errRef = useRef()
-
-  const navigate= useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/"
+  const navigator= useNavigate();
 
   const [toDisable, setToDisable]=useState(false);
 
-  const adminURL='/customerDetails/verifyAdmin'
-  const customerURL = '/customerDetails/verifyCustomer'
-  const generateOtpURL ='cusotmerDetails/generateOtp'
 
-  const [sessionId, setSessionId] = useState('')
-  const [userExist, setUserExist] = useState(false)
+  const customerVerifyURL = '/customerLogin-verifyOtp'
+  const generateCustomerOtpURL ='/customerLogin-generateOtp'
+  const generateAdminOtpURL='/adminLogin-generateOtp'
+  const adminVerifyURL='/adminLogin-verifyOtp'
+  const customerLoginURL ="/customerLogin-login"
+  const adminLoginURL ="/adminLogin-login"
 
-  const [roles, setRoles] = useState(0);
-  const  [username, setUser]=useState({username:''});
+  const  [mobileNumber, setUser]=useState({mobileNumber:''});
   const  [password, setPassword]=useState({password:''});
   const [otp, setOtp]=useState({otp:''});
-  const  [error, setError]=useState('');
 
-
-  useEffect(()=>{
-    setError('');
-  },[username, password])
+  const [isAdmin, setIsAdmin]=useState();
+  const [otpVerifed, setOtpVerified] = useState(false);
 
   const onUserChange=(e)=>{
-    setUser({username: e.target.value})
+    setUser({mobileNumber: e.target.value})
   }
   const onPassChange=(e)=>{
     setPassword({password: e.target.value})
@@ -49,54 +40,91 @@ const Login=()=>{
   }
 
   const getOTP=()=>{
+    if(isAdmin){
+
+    
     setToDisable(true);
-    http.post(generateOtpURL, username)
+    console.log(mobileNumber);
+    http.post(generateAdminOtpURL, mobileNumber,{headers:{"Content-Type":"text/plain"}})
     .then(response=>{
-      setUserExist(response.data)
       console.log('user exist: ' +response.data)
+      if(response.data){
+        window.alert("otp generated")
+      }else window.alert("otp could not be generated");
     })
     .catch(error=>console.log(error))
-
-    if(!userExist){
-      alert("You does not exist\n Please Use a registerd number!!!")
-    }else alert('Otp generated\n Please enter the otp to Login')
+  }else if(isAdmin===false){
+    setToDisable(true);
+    console.log(mobileNumber);
+    http.post(generateCustomerOtpURL, mobileNumber,{headers:{"Content-Type":"text/plain"}})
+    .then(response=>{
+      console.log('user exist: ' +response.data)
+      if(response.data){
+        window.alert("otp generated")
+      }else window.alert("otp could not be generated");
+    })
+    .catch(error=>console.log(error))
   }
-
+  }
+  const verifyOTP=()=>{
+    if(isAdmin){
+    http.post(adminVerifyURL, otp)
+    .then(response=>{
+      console.log(response.data)
+      if(response.data){
+        window.alert("otp Verified")
+      }
+      setOtpVerified(response.data)
+    })
+    .catch(error=>console.log(error))
+  }else if(isAdmin===false){
+    http.post(customerVerifyURL, otp)
+    .then(response=>{
+      console.log(response.data)
+      if(response.data){
+        window.alert("otp verified")
+      }
+      setOtpVerified(response.data)
+    })
+    .catch(error=>console.log(error))
+  }
+  }
 const handleLogin=()=>{
   //admin
-  if(roles===1988){
-    http.post(adminURL, {number: username.username, password: password.password})
+  if(otpVerifed){
+  if(isAdmin){
+    http.post(adminLoginURL, {mobileNo: mobileNumber.mobileNumber, password: password.password})
     .then(response=>{
-      setSessionId(response?.data?.sessionId)
-      console.log(response?.data)      
-      setAuth({ username, password, roles, sessionId })
-
+      console.log(response.data)      
+      if(response.data){
+        navigator("/adminHome")
+      }else{
+        window.alert("login Falied")
+      }
     })
     .catch(error=>{
-      setError(error)
       console.log(error)})
 
-
-  }
+    }else if(isAdmin===false){
   //customer
-  else if(roles===3002){
-    http.post(customerURL, {number: username.username, password: password.password})
+    http.post(customerLoginURL, {mobileNo: mobileNumber.mobileNumber, password: password.password})
     .then(response=>{
-      setSessionId(response?.data?.sessionId)
       console.log(response.data)
-
-      setAuth({ username, password, roles, sessionId })
-
+      if(response.data){
+        navigator("/userHome")
+      }else{
+        window.alert("login Falied")
+      }
     })
     .catch(error=>{
-      setError(error)
       console.log(error)})
-  }
-  console.log(username, password);
-  setUser({username:''})
+    }
+  console.log(mobileNumber, password);
+  setUser({mobileNumber:''})
   setPassword({password:''})
   setOtp({otp:''})
-  navigate(from , {replace: true});
+  setToDisable(false);
+  }else window.alert("otp Not verified yet");
 }
     
     return (<>
@@ -109,13 +137,12 @@ const handleLogin=()=>{
     <div className="mt-5">&nbsp;</div>
   <div className="row col-4 offset-4 mt-5 mb-5 bg-light p-4 border">
     <form className="row g-3">
-    <span ref={errRef} className={error?"errmsg":"offscreen"} aria-live="assertive">{error}</span>
     <h3 className="text-center">Please Sign in</h3>
     <fieldset id="toDisable" disabled={toDisable}>
   
   <div className="col-12 d-flex flex-row">
   <img className="mt-2 me-2" src="https://cdn-icons-png.flaticon.com/512/456/456212.png" style={{height: "20px", width: "20px"}}/>
-  <input type="text" className="form-control mb-3" name="userNumber" onChange={onUserChange} value={username.username}/>
+  <input type="text" className="form-control mb-3" name="userNumber" onChange={onUserChange} value={mobileNumber.mobileNumber}/>
   </div>
   <div className="col-12 d-flex flex-row">
   <img className="mt-2 me-2" src="https://cdn-icons-png.flaticon.com/512/3064/3064155.png" style={{height: "20px", width: "20px"}}/>
@@ -129,21 +156,22 @@ const handleLogin=()=>{
   <div className="row text-center">
 
     <div className="form-check col d-flex flex-row">
-      <input className="form-check-input radios" type="radio" name="role" id="flexRadioDefault1" onChange={()=>setRoles(true)} />
+      <input className="form-check-input radios" type="radio" name="role" id="flexRadioDefault1" onChange={()=>{setIsAdmin(true)}} />
       <div className="flex-row radiolabels">Admin</div>
     </div>
 
     <div className="form-check col d-flex flex-row">
-      <input className="form-check-input radios" type="radio" name="role" id="flexRadioDefault2" onChange={()=>setRoles(false)} required />
+      <input className="form-check-input radios" type="radio" name="role" id="flexRadioDefault2" onChange={()=>{setIsAdmin(false)}} required />
       <div className="flex-row radiolabels">User</div>
     </div>
 
   </div>
   </fieldset>
 <div className="row mt-3 mb-2 ms-3" >
-  <button type="button" className="btn btn-warning col-form flex-row col-4"onClick={getOTP}>Get OTP</button>
+  <button type="button" className="btn btn-warning col-form flex-row col-4" onClick={getOTP}>Get OTP</button>
   <div className="col">
     <input type="text" className="form-control col-form-control col-8 flex-row" placeholder="Enter OTP" onChange={onOtpChange} value={otp.otp}/>
+    <button type="button" className="btn btn-warning col-form flex-row col-4" onClick={verifyOTP}>Verify OTP</button>
   </div>
 </div>
 

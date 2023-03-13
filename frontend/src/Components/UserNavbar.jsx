@@ -19,7 +19,7 @@ const handleLoan=()=>{
 }
 
 const handleLogout=()=>{
-  navigator("/userLogout")
+  navigator("/")
 }
 
     return (
