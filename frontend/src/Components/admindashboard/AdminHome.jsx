@@ -47,7 +47,6 @@ const AdminHome=()=> {
                 <div className="row mt-5">
                   <Navbar/>
                 </div>
-
                 <div className="row mt-5 grind-container">
                   <h1 className="text-center mt-5 col">Welcome to home</h1>
                   <button className="btn btn-warning col-2 me-3" type="button" onClick={handleAddNewAdmin}><HiPlus size={40}/> Add New Admin</button>

@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import UserNavbar from '../UserNavbar'
 import http from '../../httpCommon'
-import { HiCheck } from 'react-icons/hi'
+
 const UserBhishi=()=> {
     const [userBhishiDetails,setUserBhishiDetails]=useState({})
     const bhishiDetailsURL="/customerDashboard-getBhishi"
@@ -43,7 +43,7 @@ const onChange=(e)=>{
         <div className='row grid-container'>
         <table className="table-primary border-5" style={{display:status}}>
                 <thead>
-                  <tr className="table-primary">
+                <tr className="table-primary">
                     <td className="table-primary">start Date </td>
                     <td></td>
                     <td className="table-primary">maturity Date </td>

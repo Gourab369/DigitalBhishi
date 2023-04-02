@@ -45,6 +45,8 @@ const Login=()=>{
     
     setToDisable(true);
     console.log(mobileNumber);
+
+    
     http.post(generateAdminOtpURL, mobileNumber,{headers:{"Content-Type":"text/plain"}})
     .then(response=>{
       console.log('user exist: ' +response.data)
