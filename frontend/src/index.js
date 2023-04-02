@@ -1,20 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Route, Routes} from 'react-router-dom';
-import App from './App'
+import { BrowserRouter,Routes,Route } from 'react-router-dom';
+import Login from "./Login&Registration/Login"
+import Registration from "./Login&Registration/Registration"
+import Home from "./Home"
+import ForgetPassword from './Login&Registration/ForgetPassword';
+import ResetPassword from './ResetPassword';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-      <BrowserRouter>
-
-          <Routes>
-            <Route path="/*" element={<App/>}/>
-          </Routes>
-
-      </BrowserRouter>
+   <BrowserRouter>
+   <Routes>
+    <Route index element={<Home/>}/>
+    <Route path="login" element={<Login/>}/>
+    <Route path="registration" element={<Registration/>}/>
+    <Route path="forgetPassword" element={<ForgetPassword/>}/>
+    <Route path="resetPassword" element={<ResetPassword/>}/>
+   </Routes>
+   </BrowserRouter>
   </React.StrictMode>
 );
 
