@@ -1,5 +1,7 @@
 package rest.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -9,7 +11,8 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-public class LoanDetails {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "loanId")
+public class Loan {
     @Id
     @GeneratedValue
     private int loanId;
@@ -20,10 +23,10 @@ public class LoanDetails {
     private double repaidAmount;
 
 
-    @OneToOne(mappedBy = "loanDetails")
-    private  BhishiDetails bhishiDetails;
+    @OneToOne(mappedBy = "loan")
+    private Bhishi bhishi;
 
-    public LoanDetails(LocalDateTime dateTime, String endDate, double principalAmount, float interestPercent, double repaidAmount) {
+    public Loan(LocalDateTime dateTime, String endDate, double principalAmount, float interestPercent, double repaidAmount) {
         this.dateTime = dateTime;
         this.endDate = endDate;
         this.principalAmount = principalAmount;
@@ -31,7 +34,7 @@ public class LoanDetails {
         this.repaidAmount = repaidAmount;
     }
 
-    public LoanDetails() {
+    public Loan() {
     }
 
     public int getLoanId() {
@@ -86,7 +89,7 @@ public class LoanDetails {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LoanDetails that = (LoanDetails) o;
+        Loan that = (Loan) o;
         return loanId == that.loanId && Double.compare(that.principalAmount, principalAmount) == 0 && Float.compare(that.interestPercent, interestPercent) == 0 && Double.compare(that.repaidAmount, repaidAmount) == 0 && Objects.equals(dateTime, that.dateTime) && Objects.equals(endDate, that.endDate);
     }
 

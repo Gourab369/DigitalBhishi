@@ -1,5 +1,7 @@
 package rest.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -7,8 +9,9 @@ import jakarta.persistence.OneToOne;
 
 import java.util.Objects;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "addressId")
 @Entity
-public class Addresses {
+public class Address {
 
     @Id
     @GeneratedValue
@@ -22,16 +25,19 @@ public class Addresses {
     private String zipCode;
 
     @OneToOne(mappedBy = "address") // instance variable name not a column name;
-    private AdminDetails adminDetails;
+    private Admin admin;
 
     @OneToOne(mappedBy = "customerAddress")
-    private CustomerDetails customerDetails;
+    private Customer customer;
 
-    public void setAdminDetails(AdminDetails adminDetails) {
-        this.adminDetails = adminDetails;
+    @OneToOne(mappedBy = "newCustomerAddress")
+    private NewCustomer newCustomer;
+
+    public void setAdminDetails(Admin admin) {
+        this.admin = admin;
     }
 
-    public Addresses(int addressId, String street, String locality, String cityOrVillage, String tahasil, String district, String state, String zipCode) {
+    public Address(int addressId, String street, String locality, String cityOrVillage, String tahasil, String district, String state, String zipCode) {
         this.addressId = addressId;
         this.street = street;
         this.locality = locality;
@@ -42,7 +48,7 @@ public class Addresses {
         this.zipCode = zipCode;
     }
 
-    public Addresses() {
+    public Address() {
     }
 
     public void setAddressId(int addressId) {
@@ -113,7 +119,7 @@ public class Addresses {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Addresses adresses = (Addresses) o;
+        Address adresses = (Address) o;
         return addressId == adresses.addressId && Objects.equals(street, adresses.street) && Objects.equals(locality, adresses.locality) && Objects.equals(cityOrVillage, adresses.cityOrVillage) && Objects.equals(tahasil, adresses.tahasil) && Objects.equals(district, adresses.district) && Objects.equals(state, adresses.state) && Objects.equals(zipCode, adresses.zipCode);
     }
 

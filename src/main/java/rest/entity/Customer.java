@@ -1,11 +1,12 @@
 package rest.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
-import javax.swing.text.Document;
-
 @Entity
-public class CustomerDetails {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "customerId")
+public class Customer {
     @Id
     @GeneratedValue
     private Integer customerId;
@@ -20,26 +21,29 @@ public class CustomerDetails {
     private String guarantor1Aadhar;
     private String guarantor2Aadhar;
 
+    private String password;
+
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) // attributes are necessary
-    @JoinColumn(name="AddressId")
-    private Addresses customerAddress;
+    @JoinColumn(name="addressId")
+    private Address customerAddress;
 
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="adminId")
-    private AdminDetails adminDetails;
+    private Admin admin;
 
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name="bhishiId")
-    private BhishiDetails bhishiDetails;
+    private Bhishi bhishi;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name="documentId")
     private SecurityDocuments securityDocuments;
 
-    public CustomerDetails(String firstName, String middleName, String lastName, String mobileNumber, String alternateNumber, String aadharNumber, String aadharPic, String guarantor1Aadhar, String guarantor2Aadhar, Addresses address, AdminDetails adminDetails, BhishiDetails bhishiDetails, SecurityDocuments securityDocuments) {
+
+    public Customer(String firstName, String middleName, String lastName, String mobileNumber, String alternateNumber, String aadharNumber, String aadharPic, String guarantor1Aadhar, String guarantor2Aadhar, String password,Address address, Admin admin, Bhishi bhishi, SecurityDocuments securityDocuments) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -49,13 +53,14 @@ public class CustomerDetails {
         this.aadharPic = aadharPic;
         this.guarantor1Aadhar = guarantor1Aadhar;
         this.guarantor2Aadhar = guarantor2Aadhar;
+        this.password = password;
         this.customerAddress = address;
-        this.adminDetails = adminDetails;
-        this.bhishiDetails = bhishiDetails;
+        this.admin = admin;
+        this.bhishi = bhishi;
         this.securityDocuments = securityDocuments;
     }
 
-    public CustomerDetails() {
+    public Customer() {
     }
 
     public Integer getCustomerId() {
@@ -102,20 +107,20 @@ public class CustomerDetails {
         this.guarantor2Aadhar = guarantor2Aadhar;
     }
 
-    public AdminDetails getAdminDetails() {
-        return adminDetails;
+    public Admin getAdminDetails() {
+        return admin;
     }
 
-    public void setAdminDetails(AdminDetails adminDetails) {
-        this.adminDetails = adminDetails;
+    public void setAdminDetails(Admin admin) {
+        this.admin = admin;
     }
 
-    public BhishiDetails getBhishiDetails() {
-        return bhishiDetails;
+    public Bhishi getBhishiDetails() {
+        return bhishi;
     }
 
-    public void setBhishiDetails(BhishiDetails bhishiDetails) {
-        this.bhishiDetails = bhishiDetails;
+    public void setBhishiDetails(Bhishi bhishi) {
+        this.bhishi = bhishi;
     }
 
     public SecurityDocuments getSecurityDocuments() {
@@ -162,13 +167,19 @@ public class CustomerDetails {
         return guarantor2Aadhar;
     }
 
-    public void setAddress(Addresses address) {
+    public void setAddress(Address address) {
         this.customerAddress = address;
     }
 
-    public Addresses getAddress() {
+    public Address getAddress() {
         return customerAddress;
     }
 
+    public String getPassword() {
+        return password;
+    }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

@@ -1,15 +1,16 @@
 import React,{useState} from 'react'
 import http from '../../httpCommon'
 import Navbar from '../Navbar'
-
+import backgroundImage from "./backdashboard.jpg"
+import { HiTicket } from 'react-icons/hi'
 
 const AdminRequest=()=> {
   const requestURL="/AdminDashboard-getAllNewCustomers"  
   const sendDataURL="/AdminDashboard-approveCustomer/"
   const [customers, setCustomers]=useState([])
- // const [bhishiDetails]= useState({
- //   startDate:undefined,maturityDate:undefined, premium:200,paidUp:0, isActive:true, transactionStatus:0//default values
- // })
+  const [bhishiDetails]= useState({
+    startDate:undefined,maturityDate:undefined, premium:200,paidUp:0, isActive:true, transactionStatus:0//default values
+  })
   const handleGetRequest=()=>{
     http.get(requestURL)
     .then(response=>{
@@ -29,12 +30,12 @@ return isoString;
 
 
 }
-//  const getEndDate=(date)=>{
-  //  var y=parseInt(date.substring(0,4))+1
-   // var m=date.substring(5,7);
-   // var d=date.substring(8,10);
-   // return  y+"-"+m+"-"+d;
-  //}
+  const getEndDate=(date)=>{
+    var y=parseInt(date.substring(0,4))+1
+    var m=date.substring(5,7);
+    var d=date.substring(8,10);
+    return  y+"-"+m+"-"+d;
+  }
   const handleApprove=(e)=>{
     var currentDate=createDate();
     //var endDate=getEndDate(currentDate);

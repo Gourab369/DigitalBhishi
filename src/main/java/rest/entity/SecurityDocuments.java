@@ -1,5 +1,7 @@
 package rest.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -8,6 +10,7 @@ import jakarta.persistence.OneToOne;
 import java.util.Objects;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "documentId")
 public class SecurityDocuments {
     @Id
     @GeneratedValue
@@ -18,7 +21,7 @@ public class SecurityDocuments {
     private String document4;
 
     @OneToOne(mappedBy = "securityDocuments")
-    private CustomerDetails customerDetails;
+    private Customer customer;
     public SecurityDocuments(String document1, String document2, String document3, String document4) {
         this.document1 = document1;
         this.document2 = document2;

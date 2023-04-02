@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import Navbar from '../Navbar';
+import backgroundImage from "./backdashboard.jpg"
 import http from '../../httpCommon'
 
 const AdminCustomers = () => {

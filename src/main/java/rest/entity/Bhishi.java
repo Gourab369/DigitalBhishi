@@ -1,13 +1,16 @@
 package rest.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Objects;
+import java.util.Set;
 
 @Entity
-public class BhishiDetails {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "bhishiId")
+public class Bhishi {
 
     @Id
     @GeneratedValue
@@ -17,20 +20,24 @@ public class BhishiDetails {
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) // attributes are necessary
     @JoinColumn(name="LoanId")
-    private LoanDetails loanDetails;
+    private Loan loan;
 
-    @OneToOne(mappedBy = "bhishiDetails")
-    private CustomerDetails customerDetails;
+    @OneToOne(mappedBy = "bhishi")
+    private Customer customer;
     private boolean isActive;
     private boolean loanStatus;
     private int inactiveDays;
     private String terminationStatus;
     private double premiumAmount;
 
-    public BhishiDetails(LocalDateTime startDate, LocalDate maturityDate, LoanDetails loanDetails, boolean isActive, boolean loanStatus, int inactiveDays, String terminationStatus, double premiumAmount) {
+    private double paidUpValues;
+
+    @OneToMany(mappedBy = "bhishi")
+    private Set<Payment> payments;
+    public Bhishi(LocalDateTime startDate, LocalDate maturityDate, Loan loan, boolean isActive, boolean loanStatus, int inactiveDays, String terminationStatus, double premiumAmount) {
         this.startDate = startDate;
         this.maturityDate = maturityDate;
-        this.loanDetails = loanDetails;
+        this.loan = loan;
         this.isActive = isActive;
         this.loanStatus = loanStatus;
         this.inactiveDays = inactiveDays;
@@ -38,8 +45,49 @@ public class BhishiDetails {
         this.premiumAmount = premiumAmount;
     }
 
-    public BhishiDetails() {
+    public Bhishi() {
     }
+
+    public Set<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(Set<Payment> payments) {
+        this.payments = payments;
+    }
+
+    public int getBhishiId() {
+        return bhishiId;
+    }
+
+    public void setBhishiId(int bhishiId) {
+        this.bhishiId = bhishiId;
+    }
+
+    public Loan getLoan() {
+        return loan;
+    }
+
+    public void setLoan(Loan loan) {
+        this.loan = loan;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public double getPaidUpValues() {
+        return paidUpValues;
+    }
+
+    public void setPaidUpValues(double paidUpValues) {
+        this.paidUpValues = paidUpValues;
+    }
+
 
     public void setBhishiID(int bhishiId) {
         this.bhishiId = bhishiId;
@@ -106,13 +154,13 @@ public class BhishiDetails {
         return premiumAmount;
     }
 
-    public LoanDetails getLoanDetails() {
-        return loanDetails;
+    public Loan getLoanDetails() {
+        return loan;
     }
 
     
-    public void setLoanDetails(LoanDetails loanDetails) {
-        this.loanDetails = loanDetails;
+    public void setLoanDetails(Loan loan) {
+        this.loan = loan;
     }
 
 }
